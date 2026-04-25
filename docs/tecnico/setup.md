@@ -81,6 +81,12 @@ Executar testes funcionais da API:
 npm test
 ```
 
+Executar testes unitários:
+
+```bash
+npm run test:unit
+```
+
 Gerar relatório HTML/JSON dos testes:
 
 ```bash

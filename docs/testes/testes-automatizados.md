@@ -16,6 +16,12 @@ Para executar os testes funcionais de API:
 npm test
 ```
 
+Para executar os testes unitários:
+
+```bash
+npm run test:unit
+```
+
 Para gerar relatório HTML e JSON com Mochawesome:
 
 ```bash
@@ -37,6 +43,7 @@ Observações:
 ## Estrutura implementada
 
 - `test/setup.js`: hooks globais do Mocha para reset do banco antes de cada teste
+- `test/unit/*.spec.js`: suíte unitária das funções puras de domínio e utilitários
 - `test/api/helpers/db.js`: reset e fechamento da conexão do banco de teste
 - `test/api/helpers/auth.js`: helpers de cadastro, login e cabeçalho Authorization
 - `test/api/helpers/factory.js`: fábricas de dados válidos para os cenários
@@ -48,6 +55,7 @@ Observações:
 
 - todos os casos `CT-001` a `CT-047`
 - todos os casos `CPT-001` a `CPT-006`
+- validadores, normalização e `AppError` cobertos por testes unitários
 - cenários de concorrência documentados
 - normalização canônica de enums com caixa e acentuação variáveis
 - contrato de autenticação e método HTTP indevido
@@ -81,6 +89,7 @@ Observações:
 ## Suítes implementadas
 
 - `auth.spec.js`: `CT-001` a `CT-007` e `CT-046`
+- `unit/normalization.spec.js`, `unit/validators.spec.js` e `unit/app-error.spec.js`: cobertura unitária de utilitários e regras puras
 - `guilds.spec.js`: `CT-008`, `CT-009`, `CT-010`, `CT-030`, `CT-031`, `CT-032`, `CT-033` e `CT-039`
 - `guild-members.spec.js`: `CT-012` a `CT-029` e `CT-047` para entrada acento-insensitive em cargo
 - `users.spec.js`: `CT-035` a `CT-041` e `CT-047` para filtros acento-insensitive

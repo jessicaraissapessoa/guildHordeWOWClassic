@@ -8,6 +8,7 @@
     "dev": "node --watch src/server.js",
     "db:init": "node src/scripts/init-db.js",
     "db:init:test": "node src/scripts/init-db.js --env=test",
+    "test:unit": "mocha \"test/unit/**/*.spec.js\"",
     "test": "mocha --require test/setup.js \"test/api/**/*.spec.js\"",
     "test:html": "mocha --require test/setup.js \"test/api/**/*.spec.js\" --reporter mochawesome --reporter-options reportDir=test-reports/mochawesome,reportFilename=api-tests,html=true,json=true",
     "test:performance": "node test/performance/run-all.js"

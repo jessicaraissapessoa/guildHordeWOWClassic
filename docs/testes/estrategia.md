@@ -6,16 +6,17 @@ Garantir que as regras de negocio, validacoes e endpoints principais funcionem c
 
 ## Stack de testes
 
-- Mocha
-- Supertest
-- Chai
-- Mochawesome
+- Mocha para testes unitarios e de integracao/API
+- Chai para assercoes
+- Supertest para chamadas HTTP nos testes de integracao/API
+- Mochawesome para relatorio HTML/JSON da suite de API
+- k6 para testes de performance
 
 ## Tipos de teste
 
 ### Unitarios
 
-Testam funcoes puras, normalizacao, validadores e matriz de combinacoes `race + class + roleType`.
+Testam funcoes puras, normalizacao, validadores, `AppError`, matriz de combinacoes `race + class + roleType` e regras de hierarquia.
 
 ### Integracao
 
@@ -51,6 +52,7 @@ Testam tempo de resposta, estabilidade e comportamento sob carga nos endpoints m
 ## Diretrizes
 
 - Cada regra de negocio importante deve ter pelo menos um caso de teste.
+- Regras puras e utilitarios devem preferencialmente ser cobertos por testes unitarios antes da cobertura integrada.
 - Toda correcao de bug deve ganhar teste automatizado quando possivel.
 - Testes de erro devem validar tanto o status code quanto o codigo padronizado de erro.
 - Operacoes criticas devem ter cenarios que cubram revalidacao e concorrencia sempre que viavel.

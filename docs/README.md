@@ -6,13 +6,13 @@ Esta pasta concentra a documentacao funcional, tecnica e de qualidade da API `gu
 
 - Dominio: sistema de guildas da Horda para World of Warcraft Classic.
 - Execucao inicial: ambiente local.
-- Stack principal: JavaScript, Node.js, Express, MySQL, mysql2, jsonwebtoken, bcrypt, Swagger/OpenAPI, Mocha, Supertest, Chai, Mochawesome e GitHub Actions.
+- Stack principal: JavaScript, Node.js, Express, MySQL, mysql2, jsonwebtoken, bcrypt, Swagger/OpenAPI, Mocha, Supertest, Chai, Mochawesome, k6 e GitHub Actions.
 
 ## Estrutura
 
 - [Produto](produto/regras-de-negocio.md): regras de negocio, epicos e user stories.
 - [API](api/overview.md): visao geral, autenticação, endpoints, erros e contrato Swagger.
-- [Testes](testes/estrategia.md): estrategia, casos de teste e rastreabilidade com testes automatizados.
+- [Testes](testes/estrategia.md): estrategia, casos de teste e rastreabilidade com testes unitarios, integracao/API e concorrencia.
 - [Performance](testes/performance.md): objetivos, escopo inicial e cenarios de teste de performance com k6.
 - [Tecnico](tecnico/requisitos.md): requisitos, modelo de dados, setup e changelog.
 
