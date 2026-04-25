@@ -26,11 +26,14 @@ Todas as mudanças relevantes da API devem ser registradas aqui.
 - Runner de performance que sobe uma instância temporária da API na porta `3010`.
 - Relatório HTML de testes em `test-reports/mochawesome/api-tests.html`.
 - README principal do repositório com visão geral do projeto, setup, testes e links para a documentação complementar.
+- Pipelines com GitHub Actions para CI e performance.
+- Publicação de artefatos do Mochawesome e dos sumários do k6 no GitHub Actions.
 
 ### Alterado
 
 - Normalização de enums para aceitar caixa e acentuação variáveis na entrada e persistir valor canônico.
 - Valor canônico da classe `Xamã`.
 - Middleware de rate limit para permitir desabilitação controlada em testes de performance.
+- Runner de performance para exportar sumários JSON do k6 quando a execução solicitar diretório de resultados.
 - Documentação de setup, testes automatizados, estratégia, performance e casos de teste para refletir a cobertura implementada.
-- Documentação geral para diferenciar funcionalidades já implementadas de itens ainda planejados, como GitHub Actions.
+- Documentação geral para refletir GitHub Actions como parte implementada da stack do projeto.

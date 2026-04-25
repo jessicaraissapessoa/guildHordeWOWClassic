@@ -99,6 +99,19 @@ Executar a suíte de performance com k6:
 npm run test:performance
 ```
 
+## GitHub Actions
+
+As pipelines implementadas no repositório são:
+
+- `.github/workflows/ci.yml`: instala dependências, sobe MySQL, cria `.env.test`, inicializa o banco de teste, executa testes unitários e testes de API com relatório Mochawesome.
+- `.github/workflows/performance.yml`: instala dependências, sobe MySQL, cria `.env.test`, inicializa o banco de teste, executa a suíte `k6` e publica os sumários de performance como artefato.
+
+Observações:
+
+- As pipelines usam MySQL 8 em service container do GitHub Actions.
+- O ambiente de CI usa `.env.test` gerado durante a execução da workflow.
+- A suíte de performance define `ENV_FILE=.env.test` e `K6_RESULTS_DIR=k6-results`.
+
 ## Banco de dados local
 
 Passos práticos:

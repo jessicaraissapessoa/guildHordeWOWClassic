@@ -14,10 +14,7 @@ O projeto já conta com:
 - testes de integração/API
 - testes de concorrência
 - testes de performance com k6
-
-Item ainda planejado:
-
-- pipeline CI com GitHub Actions
+- pipelines com GitHub Actions para CI e performance
 
 ## Funcionalidades
 
@@ -58,6 +55,7 @@ Item ainda planejado:
 - Supertest
 - Mochawesome
 - k6
+- GitHub Actions
 
 ## Regras importantes do domínio
 
@@ -162,6 +160,13 @@ Execute os testes de performance:
 ```bash
 npm run test:performance
 ```
+
+## GitHub Actions
+
+O repositório possui duas workflows:
+
+- `CI`: executa em `push`, `pull_request` e `workflow_dispatch`, sobe MySQL no GitHub Actions, inicializa o banco de teste, roda testes unitários e testes de API com relatório HTML do Mochawesome.
+- `Performance`: executa em `push` para `master` e em `workflow_dispatch`, sobe MySQL, inicializa o banco de teste, roda a suíte de performance com `k6` e publica os sumários exportados como artefato.
 
 ## Estrutura do projeto
 

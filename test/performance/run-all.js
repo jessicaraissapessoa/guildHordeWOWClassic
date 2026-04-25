@@ -1,4 +1,5 @@
 const { spawn, spawnSync } = require('child_process');
+const fs = require('fs');
 const http = require('http');
 const path = require('path');
 
@@ -14,6 +15,7 @@ const scripts = [
 const performancePort = process.env.PERFORMANCE_PORT || '3010';
 const customBaseUrl = process.env.BASE_URL;
 const baseUrl = customBaseUrl || `http://localhost:${performancePort}`;
+const k6ResultsDir = process.env.K6_RESULTS_DIR;
 
 function waitForHealth(url, timeoutMs = 30000) {
   const startedAt = Date.now();
@@ -53,6 +55,10 @@ async function run() {
   let serverProcess = null;
 
   try {
+    if (k6ResultsDir) {
+      fs.mkdirSync(k6ResultsDir, { recursive: true });
+    }
+
     if (!customBaseUrl) {
       const serverPath = path.join(__dirname, '..', '..', 'src', 'server.js');
       serverProcess = spawn(process.execPath, [serverPath], {
@@ -70,7 +76,16 @@ async function run() {
 
     for (const script of scripts) {
       const scriptPath = path.join(__dirname, script);
-      const result = spawnSync('k6', ['run', scriptPath], {
+      const args = ['run'];
+
+      if (k6ResultsDir) {
+        const summaryFileName = `${path.basename(script, '.js')}-summary.json`;
+        args.push('--summary-export', path.join(k6ResultsDir, summaryFileName));
+      }
+
+      args.push(scriptPath);
+
+      const result = spawnSync('k6', args, {
         stdio: 'inherit',
         env: {
           ...process.env,

@@ -39,6 +39,8 @@ Observações:
 - Os testes fazem chamadas HTTP simuladas com `Supertest` sobre a aplicação Express.
 - O ambiente de teste usa `.env.test` com banco `guild_horde_wow_classic_test`.
 - O comando `npm run test:performance` executa em sequência os scripts `k6` dos casos `CPT-001` a `CPT-006`.
+- A workflow `CI` do GitHub Actions executa testes unitários e testes de API, publicando o relatório do Mochawesome como artefato.
+- A workflow `Performance` do GitHub Actions executa a suíte `k6` e publica os sumários exportados em `k6-results`.
 
 ## Estrutura implementada
 

@@ -83,3 +83,4 @@ Validar efeitos de disputa em criação de guilda, cadastro de integrante, alter
 - Os scripts usam somente HTTP contra a API em execução local.
 - O runner de performance sobe uma instância temporária da API com `DISABLE_RATE_LIMIT=true` para evitar que o setup dos cenários seja bloqueado pelo rate limit de autenticação.
 - Novos cenários devem evoluir sem misturar teste funcional e teste de carga na mesma execução.
+- A pipeline `Performance` do GitHub Actions define `K6_RESULTS_DIR=k6-results` para exportar um sumário JSON por cenário executado.

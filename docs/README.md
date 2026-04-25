@@ -7,7 +7,7 @@ Esta pasta concentra a documentação funcional, técnica e de qualidade da API 
 - Domínio: sistema de guildas da Horda para World of Warcraft Classic.
 - Execução inicial: ambiente local.
 - Stack principal: JavaScript, Node.js, Express, MySQL, mysql2, jsonwebtoken, bcrypt, Swagger/OpenAPI, Mocha, Supertest, Chai, Mochawesome e k6.
-- GitHub Actions: planejado para a etapa de pipeline CI.
+- GitHub Actions: implementado para CI e performance.
 
 ## Estrutura
 

@@ -1,0 +1,74 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    name: Testes unitários e de API
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -proot"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=12
+
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Criar arquivo .env.test para CI
+        shell: bash
+        run: |
+          cat <<'EOF' > .env.test
+          PORT=3001
+          DB_HOST=127.0.0.1
+          DB_PORT=3306
+          DB_NAME=guild_horde_wow_classic_test
+          DB_USER=root
+          DB_PASSWORD=root
+          JWT_SECRET=ci-test-secret
+          JWT_EXPIRES_IN=1h
+          EOF
+
+      - name: Inicializar banco de teste
+        run: npm run db:init:test
+
+      - name: Executar testes unitários
+        run: npm run test:unit
+
+      - name: Executar testes de API e gerar relatório HTML
+        run: npm run test:html
+
+      - name: Publicar artefato do Mochawesome
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mochawesome-report
+          path: test-reports/mochawesome
+          if-no-files-found: warn
+          retention-days: 14
