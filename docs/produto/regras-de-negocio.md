@@ -438,6 +438,20 @@ Manter consistencia com a unicidade normalizada de `guildName`.
 
 - `GET /guilds/{guildName}/members`
 
+## RN-026A - Listagem de guildas suporta paginacao e ordenacao
+
+### Regra
+
+`GET /guilds` deve listar todas as guildas cadastradas no sistema, exigindo autenticacao e suportando paginacao e ordenacao.
+
+### Justificativa
+
+Permitir consulta global de guildas de forma consistente com a API.
+
+### Aplicacao
+
+- `GET /guilds`
+
 ## RN-027 - Senhas nunca devem ser persistidas ou logadas em texto puro
 
 ### Regra

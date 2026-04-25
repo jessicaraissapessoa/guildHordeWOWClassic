@@ -162,6 +162,29 @@ paths:
         '405':
           $ref: '#/components/responses/MethodNotAllowed'
   /guilds:
+    get:
+      tags: [Guilds]
+      operationId: listGuilds
+      summary: Listar guildas
+      description: Lista todas as guildas cadastradas com paginacao e ordenacao.
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/pageSize'
+        - $ref: '#/components/parameters/guildSortBy'
+        - $ref: '#/components/parameters/sortOrder'
+      responses:
+        '200':
+          description: Lista paginada de guildas
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedGuildsResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '405':
+          $ref: '#/components/responses/MethodNotAllowed'
     post:
       tags: [Guilds]
       operationId: createGuild
@@ -423,6 +446,13 @@ components:
       schema:
         type: string
         enum: [username, characterName, guildName, guildRank, race, class, roleType, createdAt]
+    guildSortBy:
+      name: sortBy
+      in: query
+      description: Campo utilizado para ordenacao das guildas.
+      schema:
+        type: string
+        enum: [guildName, leaderCharacterName, totalMembers, createdAt]
     sortOrder:
       name: sortOrder
       in: query
@@ -576,6 +606,28 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/GuildMemberResponse'
+    GuildListItemResponse:
+      type: object
+      required: [id, guildName, leaderCharacterName, totalMembers, createdAt, updatedAt]
+      properties:
+        id:
+          type: integer
+          example: 10
+        guildName:
+          type: string
+          example: Filhos da Horda
+        leaderCharacterName:
+          type: string
+          example: Thrall
+        totalMembers:
+          type: integer
+          example: 25
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
     GuildMemberResponse:
       type: object
       required: [characterName, guildName, guildRank, race, class, roleType]
@@ -610,6 +662,22 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/UserResponse'
+    PaginatedGuildsResponse:
+      type: object
+      required: [page, pageSize, total, items]
+      properties:
+        page:
+          type: integer
+        pageSize:
+          type: integer
+        total:
+          type: integer
+        totalPages:
+          type: integer
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/GuildListItemResponse'
     Race:
       type: string
       description: A API aceita entrada em qualquer caixa e normaliza para o valor canonico retornado abaixo.

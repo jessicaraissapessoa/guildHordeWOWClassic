@@ -27,14 +27,16 @@ Permitir que usuários criem, desfaçam e consultem guildas e seus integrantes.
 ### Escopo
 
 - Criacao de guilda.
+- Listagem de guildas.
 - Delecao de guilda.
 - Listagem de integrantes por guilda.
 
 ### User stories relacionadas
 
 - US-004 - Criar guilda
-- US-005 - Deletar guilda
-- US-006 - Listar integrantes de uma guilda
+- US-005 - Listar guildas
+- US-006 - Deletar guilda
+- US-007 - Listar integrantes de uma guilda
 
 ## EP-003 - Gestão de Integrantes e Hierarquia
 
@@ -52,9 +54,10 @@ Permitir cadastro, remocao e administracao de integrantes respeitando a hierarqu
 ### User stories relacionadas
 
 - US-007 - Cadastrar integrante na guilda
-- US-008 - Alterar cargo de integrante
-- US-009 - Remover integrante da guilda
-- US-010 - Sair da guilda
+- US-008 - Cadastrar integrante na guilda
+- US-009 - Alterar cargo de integrante
+- US-010 - Remover integrante da guilda
+- US-011 - Sair da guilda
 
 ## EP-004 - Consulta e Manutencao de Dados de Dominio
 
@@ -69,5 +72,5 @@ Permitir consulta de usuários com filtros e manutencao da propria função resp
 
 ### User stories relacionadas
 
-- US-011 - Alterar a propria função
-- US-012 - Listar usuários
+- US-012 - Alterar a propria função
+- US-013 - Listar usuários

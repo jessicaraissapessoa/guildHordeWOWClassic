@@ -37,6 +37,7 @@ Testam tempo de resposta, estabilidade e comportamento sob carga nos endpoints m
 - Combinacoes validas de `race`, `class` e `roleType`
 - Hierarquia `Leader > Officer > Member`
 - Criacao e delecao de guilda
+- Listagem de guildas
 - Entrada e saida de integrantes
 - Filtros, paginacao e ordenacao de `GET /users`
 - Requisicoes sem autenticação, com token invalido e com token expirado
@@ -63,6 +64,7 @@ Escopo inicial recomendado:
 
 - `POST /auth/login`
 - `GET /users`
+- `GET /guilds`
 - `POST /guilds`
 - `POST /guilds/members`
 - `PATCH /guilds/members/{characterName}/rank`

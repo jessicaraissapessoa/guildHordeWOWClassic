@@ -112,6 +112,30 @@ Protegido.
 
 ## Guildas
 
+## GET /guilds
+
+### Descrição
+
+Lista todas as guildas cadastradas com paginação e ordenação.
+
+### Autenticação
+
+Protegido.
+
+### Query params
+
+- `page`
+- `pageSize`
+- `sortBy`
+- `sortOrder`
+
+### Regras relacionadas
+
+- RN-001
+- RN-026A
+- RN-032
+- RN-034
+
 ## POST /guilds
 
 ### Descrição

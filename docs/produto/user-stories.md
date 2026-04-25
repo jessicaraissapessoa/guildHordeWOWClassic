@@ -75,7 +75,25 @@ Como usuário autenticado sem guilda, quero criar uma guilda para lidera-la.
 - Deve cadastrar o autor como `Leader`.
 - Requisicoes concorrentes para o mesmo nome de guilda não podem criar duplicidade.
 
-## US-005 - Deletar guilda
+## US-005 - Listar guildas
+
+### Epico
+
+EP-002 - Ciclo de Vida da Guilda
+
+### Historia
+
+Como usuário autenticado, quero listar as guildas do sistema.
+
+### Criterios de aceite
+
+- Deve exigir autenticação.
+- Deve listar todas as guildas cadastradas.
+- Deve suportar paginacao.
+- Deve suportar ordenacao.
+- Deve retornar ao menos nome da guilda, lider atual e quantidade de integrantes.
+
+## US-006 - Deletar guilda
 
 ### Epico
 
@@ -94,7 +112,7 @@ Como líder, quero deletar a minha guilda quando eu decidir desfaze-la.
 - Deve bloquear a operacao para `Officer` e `Member`.
 - Deve falhar sem efeito parcial em cenarios concorrentes.
 
-## US-006 - Listar integrantes de uma guilda
+## US-007 - Listar integrantes de uma guilda
 
 ### Epico
 
@@ -112,7 +130,7 @@ Como usuário autenticado, quero consultar os integrantes de uma guilda para vis
 - Deve retornar nome do personagem, guilda, cargo, raça, classe e função dos integrantes.
 - Deve rejeitar requisicoes sem token ou com token invalido.
 
-## US-007 - Cadastrar integrante na guilda
+## US-008 - Cadastrar integrante na guilda
 
 ### Epico
 
@@ -132,7 +150,7 @@ Como líder ou oficial, quero adicionar um usuário sem guilda a minha guilda.
 - Deve bloquear `Member` e usuário sem guilda.
 - Deve falhar sem duplicar entrada em cenarios concorrentes.
 
-## US-008 - Alterar cargo de integrante
+## US-009 - Alterar cargo de integrante
 
 ### Epico
 
@@ -152,7 +170,7 @@ Como líder, quero alterar o cargo de um integrante da minha guilda.
 - Deve bloquear `Officer`, `Member` e usuário fora da guilda do alvo.
 - Deve impedir estados concorrentes com mais de um líder.
 
-## US-009 - Remover integrante da guilda
+## US-010 - Remover integrante da guilda
 
 ### Epico
 
@@ -173,7 +191,7 @@ Como integrante com permissao suficiente, quero remover integrantes de hierarqui
 - Deve bloquear requisicoes feitas por usuário sem guilda.
 - Deve falhar sem efeito parcial em disputa concorrente com alteração de cargo ou delecao de guilda.
 
-## US-010 - Sair da guilda
+## US-011 - Sair da guilda
 
 ### Epico
 
@@ -191,7 +209,7 @@ Como integrante de uma guilda, quero sair da guilda atual quando permitido pelas
 - Se for líder, deve bloquear a saida enquanto ele ainda mantiver a lideranca.
 - Deve bloquear requisicoes sem token, com token invalido ou por usuário sem guilda.
 
-## US-011 - Alterar a propria função
+## US-012 - Alterar a propria função
 
 ### Epico
 
@@ -208,7 +226,7 @@ Como usuário autenticado, quero alterar minha propria função para manter meu 
 - Deve validar a combinação resultante entre `race`, `class` e `roleType`.
 - Deve rejeitar token ausente, invalido ou expirado.
 
-## US-012 - Listar usuários
+## US-013 - Listar usuários
 
 ### Epico
 

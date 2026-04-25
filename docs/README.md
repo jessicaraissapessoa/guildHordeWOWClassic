@@ -21,6 +21,7 @@ Esta pasta concentra a documentacao funcional, tecnica e de qualidade da API `gu
 - Cadastro de usuário.
 - Login.
 - Criacao de guilda.
+- Listagem de guildas.
 - Cadastro de integrante na propria guilda.
 - Alteração da propria função.
 - Alteração de cargo por líder.

@@ -19,6 +19,12 @@
 npm install
 ```
 
+Para preparar o banco local:
+
+```bash
+npm run db:init
+```
+
 ## Variaveis de ambiente esperadas
 
 Documentar em `.env` quando a implementacao existir:
@@ -36,10 +42,11 @@ JWT_EXPIRES_IN=1h
 
 ## Execucao local
 
-Comandos exatos dependerao dos scripts reais do projeto. A expectativa e ter algo equivalente a:
+Scripts implementados no projeto:
 
 ```bash
 npm run dev
+npm start
 ```
 
 ## Banco de dados local
@@ -52,7 +59,11 @@ Passos esperados:
 
 ## Swagger local
 
-O contrato OpenAPI fica em `docs/api/swagger/openapi.yaml` e deve apontar para `http://localhost:3000`.
+O contrato OpenAPI fica em `docs/api/swagger/openapi.yaml` e e servido pela propria API em:
+
+```text
+http://localhost:3000/api-docs
+```
 
 ## Performance local
 

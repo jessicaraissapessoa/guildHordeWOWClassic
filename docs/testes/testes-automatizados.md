@@ -35,15 +35,15 @@ Observacao:
 | Caso de teste | Tipo sugerido | Ferramentas |
 |---|---|---|
 | CT-001 a CT-007 | Integracao/API | Mocha + Supertest + Chai |
-| CT-008 a CT-039 | Integracao/API | Mocha + Supertest + Chai |
-| CT-040 a CT-044 | Seguranca/API | Mocha + Supertest + Chai |
+| CT-008 a CT-041 | Integracao/API | Mocha + Supertest + Chai |
+| CT-042 a CT-046 | Seguranca/API | Mocha + Supertest + Chai |
 | CPT-001 a CPT-006 | Performance | k6 |
 
 ## Suites recomendadas
 
 - `auth.spec.js`: cadastro, login, rate limit e sigilo de senha
 - `users.spec.js`: listagem, filtros, ordenacao, role type e delecao do proprio usuário
-- `guilds.spec.js`: criacao, delecao e listagem de integrantes
+- `guilds.spec.js`: listagem, criacao, delecao e listagem de integrantes
 - `guild-members.spec.js`: cadastro, alteração de cargo, remocao e saida da guilda
 - `security.spec.js`: `401`, `403`, `405`, token expirado e token invalido
 - `concurrency.spec.js`: cenarios criticos de disputa concorrente

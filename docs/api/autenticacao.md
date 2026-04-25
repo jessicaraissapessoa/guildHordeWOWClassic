@@ -45,6 +45,7 @@ Observacao:
 
 - `DELETE /users/me`
 - `GET /users`
+- `GET /guilds`
 - `POST /guilds`
 - `DELETE /guilds/me`
 - `GET /guilds/{guildName}/members`

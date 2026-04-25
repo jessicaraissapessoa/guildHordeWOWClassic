@@ -5,6 +5,7 @@
 - Permitir cadastro de usuário.
 - Permitir login com JWT.
 - Permitir criacao e delecao de guilda.
+- Permitir listagem paginada de guildas.
 - Permitir cadastro de integrante na propria guilda por `Leader` e `Officer`.
 - Permitir alteração da propria função.
 - Permitir alteração de cargo apenas por `Leader`.

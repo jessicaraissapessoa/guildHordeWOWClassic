@@ -68,197 +68,209 @@
 
 ## CT-012 - Adicionar integrante sem guilda na propria guilda
 
-- User story relacionada: US-007
+- User story relacionada: US-008
 - Endpoint: `POST /guilds/members`
 - Resultado esperado: alvo entra na guilda do autor com cargo `Member`
 
 ## CT-013 - Impedir membro de adicionar integrante
 
-- User story relacionada: US-007
+- User story relacionada: US-008
 - Endpoint: `POST /guilds/members`
 - Resultado esperado: retorna `403`
 
 ## CT-014 - Impedir usuário sem guilda de adicionar integrante
 
-- User story relacionada: US-007
+- User story relacionada: US-008
 - Endpoint: `POST /guilds/members`
 - Resultado esperado: retorna `403` ou `409`, conforme estrategia adotada
 
 ## CT-015 - Impedir adicionar usuário que ja pertence a uma guilda
 
-- User story relacionada: US-007
+- User story relacionada: US-008
 - Endpoint: `POST /guilds/members`
 - Resultado esperado: retorna `409`
 
 ## CT-016 - Garantir consistencia em cadastro concorrente do mesmo integrante
 
-- User story relacionada: US-007
+- User story relacionada: US-008
 - Endpoint: `POST /guilds/members`
 - Resultado esperado: o usuário entra no maximo uma vez em uma unica guilda
 
 ## CT-017 - Transferir lideranca com sucesso
 
-- User story relacionada: US-008
+- User story relacionada: US-009
 - Endpoint: `PATCH /guilds/members/{characterName}/rank`
 - Resultado esperado: alvo vira `Leader` e autor vira `Member`
 
 ## CT-018 - Impedir oficial de alterar cargo
 
-- User story relacionada: US-008
+- User story relacionada: US-009
 - Endpoint: `PATCH /guilds/members/{characterName}/rank`
 - Resultado esperado: retorna `403`
 
 ## CT-019 - Impedir alterar cargo de integrante de outra guilda
 
-- User story relacionada: US-008
+- User story relacionada: US-009
 - Endpoint: `PATCH /guilds/members/{characterName}/rank`
 - Resultado esperado: retorna `403` ou `404`, conforme estrategia adotada
 
 ## CT-020 - Garantir consistencia em transferencia concorrente de lideranca
 
-- User story relacionada: US-008
+- User story relacionada: US-009
 - Endpoint: `PATCH /guilds/members/{characterName}/rank`
 - Resultado esperado: não podem existir dois lideres ao final da disputa concorrente
 
 ## CT-021 - Permitir líder remover oficial
 
-- User story relacionada: US-009
+- User story relacionada: US-010
 - Endpoint: `DELETE /guilds/members/{characterName}`
 - Resultado esperado: integrante removido da guilda
 
 ## CT-022 - Impedir oficial de remover outro oficial
 
-- User story relacionada: US-009
+- User story relacionada: US-010
 - Endpoint: `DELETE /guilds/members/{characterName}`
 - Resultado esperado: retorna `403`
 
 ## CT-023 - Impedir líder de remover a si mesmo
 
-- User story relacionada: US-009
+- User story relacionada: US-010
 - Endpoint: `DELETE /guilds/members/{characterName}`
 - Resultado esperado: retorna `409`
 
 ## CT-024 - Impedir membro de remover outro integrante
 
-- User story relacionada: US-009
+- User story relacionada: US-010
 - Endpoint: `DELETE /guilds/members/{characterName}`
 - Resultado esperado: retorna `403`
 
 ## CT-025 - Impedir usuário sem guilda de remover integrante
 
-- User story relacionada: US-009
+- User story relacionada: US-010
 - Endpoint: `DELETE /guilds/members/{characterName}`
 - Resultado esperado: retorna `403` ou `409`, conforme estrategia adotada
 
 ## CT-026 - Garantir consistencia em remocao concorrente e alteração de cargo
 
-- User story relacionada: US-009
+- User story relacionada: US-010
 - Endpoint: `DELETE /guilds/members/{characterName}`
 - Resultado esperado: o estado final do alvo permanece consistente e sem atualizacao parcial
 
 ## CT-027 - Permitir membro sair da guilda
 
-- User story relacionada: US-010
+- User story relacionada: US-011
 - Endpoint: `POST /guilds/me/leave`
 - Resultado esperado: usuário fica com `guildId = null` e `guildRank = null`
 
 ## CT-028 - Impedir líder de sair da guilda sem transferir lideranca
 
-- User story relacionada: US-010
+- User story relacionada: US-011
 - Endpoint: `POST /guilds/me/leave`
 - Resultado esperado: retorna `409`
 
 ## CT-029 - Impedir saida da guilda por usuário sem guilda
 
-- User story relacionada: US-010
+- User story relacionada: US-011
 - Endpoint: `POST /guilds/me/leave`
 - Resultado esperado: retorna `409`
 
-## CT-030 - Deletar guilda com sucesso
+## CT-030 - Listar guildas com sucesso
 
 - User story relacionada: US-005
+- Endpoint: `GET /guilds`
+- Resultado esperado: retorna lista paginada de guildas com líder atual e quantidade de integrantes
+
+## CT-031 - Validar paginacao e ordenacao de guildas
+
+- User story relacionada: US-005
+- Endpoint: `GET /guilds`
+- Resultado esperado: respeita `page`, `pageSize`, `sortBy` e `sortOrder`
+
+## CT-032 - Deletar guilda com sucesso
+
+- User story relacionada: US-006
 - Endpoint: `DELETE /guilds/me`
 - Resultado esperado: guilda removida e integrantes desvinculados
 
-## CT-031 - Impedir deletar guilda com usuário que não e líder
+## CT-033 - Impedir deletar guilda com usuário que não e líder
 
-- User story relacionada: US-005
+- User story relacionada: US-006
 - Endpoint: `DELETE /guilds/me`
 - Resultado esperado: retorna `403`
 
-## CT-032 - Garantir consistencia em delecao concorrente da guilda
+## CT-034 - Garantir consistencia em delecao concorrente da guilda
 
-- User story relacionada: US-005
+- User story relacionada: US-006
 - Endpoint: `DELETE /guilds/me`
 - Resultado esperado: a guilda e removida uma unica vez e não restam membros vinculados
 
-## CT-033 - Alterar a propria função com sucesso
+## CT-035 - Alterar a propria função com sucesso
 
-- User story relacionada: US-011
+- User story relacionada: US-012
 - Endpoint: `PATCH /users/me/role-type`
 - Resultado esperado: atualiza `roleType` quando a combinação continua valida
 
-## CT-034 - Bloquear alteração da propria função para combinação invalida
+## CT-036 - Bloquear alteração da propria função para combinação invalida
 
-- User story relacionada: US-011
+- User story relacionada: US-012
 - Endpoint: `PATCH /users/me/role-type`
 - Resultado esperado: retorna erro de validacao ou conflito sem alterar o estado anterior
 
-## CT-035 - Listar usuários com filtros
+## CT-037 - Listar usuários com filtros
 
-- User story relacionada: US-012
+- User story relacionada: US-013
 - Endpoint: `GET /users`
 - Resultado esperado: aplica filtros por `class`, `roleType`, `guildName` e demais parametros
 
-## CT-036 - Validar paginacao e ordenacao de usuários
+## CT-038 - Validar paginacao e ordenacao de usuários
 
-- User story relacionada: US-012
+- User story relacionada: US-013
 - Endpoint: `GET /users`
 - Resultado esperado: respeita `page`, `pageSize`, `sortBy` e `sortOrder`
 
-## CT-037 - Listar integrantes de guilda com busca case-insensitive
+## CT-039 - Listar integrantes de guilda com busca case-insensitive
 
-- User story relacionada: US-006
+- User story relacionada: US-007
 - Endpoint: `GET /guilds/{guildName}/members`
 - Resultado esperado: `UmaGuilda` e `umaguilda` retornam a mesma guilda
 
-## CT-038 - Deletar o proprio usuário não líder
+## CT-040 - Deletar o proprio usuário não líder
 
 - User story relacionada: US-003
 - Endpoint: `DELETE /users/me`
 - Resultado esperado: conta removida com sucesso
 
-## CT-039 - Impedir delecao do proprio usuário enquanto for líder
+## CT-041 - Impedir delecao do proprio usuário enquanto for líder
 
 - User story relacionada: US-003
 - Endpoint: `DELETE /users/me`
 - Resultado esperado: retorna `409`
 
-## CT-040 - Rejeitar acesso sem token em endpoint protegido
+## CT-042 - Rejeitar acesso sem token em endpoint protegido
 
-- User story relacionada: US-003, US-005, US-006, US-007, US-008, US-009, US-010, US-011, US-012
+- User story relacionada: US-003, US-005, US-006, US-007, US-008, US-009, US-010, US-011, US-012, US-013
 - Endpoint: exemplo base `GET /users`
 - Resultado esperado: retorna `401`
 
-## CT-041 - Rejeitar acesso com token invalido
+## CT-043 - Rejeitar acesso com token invalido
 
-- User story relacionada: US-003, US-005, US-006, US-007, US-008, US-009, US-010, US-011, US-012
+- User story relacionada: US-003, US-005, US-006, US-007, US-008, US-009, US-010, US-011, US-012, US-013
 - Endpoint: exemplo base `GET /users`
 - Resultado esperado: retorna `401`
 
-## CT-042 - Rejeitar acesso com token expirado
+## CT-044 - Rejeitar acesso com token expirado
 
-- User story relacionada: US-003, US-005, US-006, US-007, US-008, US-009, US-010, US-011, US-012
+- User story relacionada: US-003, US-005, US-006, US-007, US-008, US-009, US-010, US-011, US-012, US-013
 - Endpoint: exemplo base `GET /users`
 - Resultado esperado: retorna `401`
 
-## CT-043 - Rejeitar metodo HTTP indevido em rota existente
+## CT-045 - Rejeitar metodo HTTP indevido em rota existente
 
-- User story relacionada: US-012
+- User story relacionada: US-005, US-013
 - Endpoint: exemplo `POST /users`
 - Resultado esperado: retorna `405`
 
-## CT-044 - Garantir que respostas não exponham senha nem hash
+## CT-046 - Garantir que respostas não exponham senha nem hash
 
 - User story relacionada: US-001, US-002
 - Endpoint: `POST /auth/register`, `POST /auth/login`

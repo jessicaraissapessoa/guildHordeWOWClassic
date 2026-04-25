@@ -33,6 +33,7 @@ Disponibilizar uma API REST para cadastro de usuários, autenticação, gestão 
 
 - Autenticação e conta do usuário
 - Ciclo de vida da guilda
+- Consulta de guildas
 - Gestão de integrantes e hierarquia
 - Consulta de usuários e integrantes
 

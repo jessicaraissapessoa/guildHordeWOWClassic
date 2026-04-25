@@ -10,6 +10,7 @@ Os primeiros testes de performance devem cobrir endpoints com maior relevancia f
 
 - `POST /auth/login`
 - `GET /users`
+- `GET /guilds`
 - `POST /guilds`
 - `POST /guilds/members`
 - `PATCH /guilds/members/{characterName}/rank`
