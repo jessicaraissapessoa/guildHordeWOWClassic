@@ -35,7 +35,7 @@ Esta pasta concentra a documentação funcional, técnica e de qualidade da API 
 
 ## Padrão de rastreabilidade
 
-Use os identificadores abaixo para conectar documentos:
+Use os identificadores abaixo para conectar os documentos:
 
 - `EP-001`: épico
 - `US-001`: user story

@@ -10,9 +10,9 @@ tags:
   - name: Auth
     description: Cadastro e autenticação de usuários.
   - name: Users
-    description: Consulta de usuários, manutencao da propria função e delecao da propria conta.
+    description: Consulta de usuários, manutenção da própria função e deleção da própria conta.
   - name: Guilds
-    description: Criacao de guilda, gestão de integrantes e administracao da propria guilda.
+    description: Criação de guilda, gestão de integrantes e administração da própria guilda.
 security:
   - bearerAuth: []
 paths:
@@ -21,7 +21,7 @@ paths:
       tags: [Auth]
       operationId: registerUser
       summary: Cadastrar usuário
-      description: Cria um novo usuário sem guilda e sem cargo. A combinação entre raça, classe e função deve ser valida.
+      description: Cria um novo usuário sem guilda e sem cargo. A combinação entre raça, classe e função deve ser válida.
       security: []
       requestBody:
         required: true
@@ -91,7 +91,7 @@ paths:
       tags: [Users]
       operationId: listUsers
       summary: Listar usuários
-      description: Lista usuários com e sem guilda, com filtros opcionais, paginacao e ordenacao.
+      description: Lista usuários com e sem guilda, com filtros opcionais, paginação e ordenação.
       parameters:
         - $ref: '#/components/parameters/username'
         - $ref: '#/components/parameters/characterName'
@@ -121,8 +121,8 @@ paths:
     delete:
       tags: [Users]
       operationId: deleteOwnUser
-      summary: Deletar o proprio usuário
-      description: Remove permanentemente a propria conta. Se o usuário ainda for líder de uma guilda, a operacao deve ser bloqueada.
+      summary: Deletar o próprio usuário
+      description: Remove permanentemente a própria conta. Se o usuário ainda for líder de uma guilda, a operação deve ser bloqueada.
       responses:
         '204':
           description: Usuário deletado com sucesso
@@ -138,7 +138,7 @@ paths:
     patch:
       tags: [Users]
       operationId: updateOwnRoleType
-      summary: Alterar a propria função
+      summary: Alterar a própria função
       description: Altera a função do usuário autenticado, validando a combinação resultante entre raça, classe e função.
       requestBody:
         required: true
@@ -166,7 +166,7 @@ paths:
       tags: [Guilds]
       operationId: listGuilds
       summary: Listar guildas
-      description: Lista todas as guildas cadastradas com paginacao e ordenacao.
+      description: Lista todas as guildas cadastradas com paginação e ordenação.
       parameters:
         - $ref: '#/components/parameters/page'
         - $ref: '#/components/parameters/pageSize'
@@ -219,7 +219,7 @@ paths:
     delete:
       tags: [Guilds]
       operationId: deleteOwnGuild
-      summary: Deletar a propria guilda
+      summary: Deletar a própria guilda
       description: Deleta a guilda do líder autenticado e desvincula todos os integrantes.
       responses:
         '204':
@@ -237,7 +237,7 @@ paths:
       tags: [Guilds]
       operationId: listGuildMembers
       summary: Listar integrantes de uma guilda
-      description: Consulta os integrantes de uma guilda por nome. A identificacao de guildName deve ser case-insensitive.
+      description: Consulta os integrantes de uma guilda por nome. A identificação de guildName deve ser case-insensitive.
       parameters:
         - $ref: '#/components/parameters/guildNamePath'
       responses:
@@ -293,7 +293,7 @@ paths:
       tags: [Guilds]
       operationId: updateGuildMemberRank
       summary: Alterar cargo de integrante
-      description: Altera o cargo de um integrante da mesma guilda. Apenas o líder pode executar a operacao.
+      description: Altera o cargo de um integrante da mesma guilda. Apenas o líder pode executar a operação.
       parameters:
         - $ref: '#/components/parameters/characterNamePath'
       requestBody:
@@ -347,7 +347,7 @@ paths:
       tags: [Guilds]
       operationId: leaveOwnGuild
       summary: Sair da guilda atual
-      description: Permite que o usuário autenticado saia da guilda atual. Líder não pode sair sem antes transferir a lideranca.
+      description: Permite que o usuário autenticado saia da guilda atual. Líder não pode sair sem antes transferir a liderança.
       responses:
         '204':
           description: Usuário saiu da guilda com sucesso
@@ -369,26 +369,26 @@ components:
     username:
       name: username
       in: query
-      description: Filtro por username. A comparacao deve ser case-insensitive.
+      description: Filtro por username. A comparação deve ser case-insensitive.
       schema:
         type: string
     characterName:
       name: characterName
       in: query
-      description: Filtro por nome do personagem. A comparacao deve ser case-insensitive.
+      description: Filtro por nome do personagem. A comparação deve ser case-insensitive.
       schema:
         type: string
     guildNameQuery:
       name: guildName
       in: query
-      description: Filtro por nome da guilda. A comparacao deve ser case-insensitive.
+      description: Filtro por nome da guilda. A comparação deve ser case-insensitive.
       schema:
         type: string
     guildNamePath:
       name: guildName
       in: path
       required: true
-      description: Nome da guilda. A identificacao deve ser case-insensitive.
+      description: Nome da guilda. A identificação deve ser case-insensitive.
       schema:
         type: string
     guildRank:
@@ -400,32 +400,32 @@ components:
     race:
       name: race
       in: query
-      description: Filtro por raça. A API aceita entrada em qualquer caixa, ignorando acentuacao, e normaliza para o valor canonico.
+      description: Filtro por raça. A API aceita entrada em qualquer caixa, ignorando acentuação, e normaliza para o valor canônico.
       schema:
         $ref: '#/components/schemas/Race'
     class:
       name: class
       in: query
-      description: Filtro por classe. A API aceita entrada em qualquer caixa, ignorando acentuacao, e normaliza para o valor canonico.
+      description: Filtro por classe. A API aceita entrada em qualquer caixa, ignorando acentuação, e normaliza para o valor canônico.
       schema:
         $ref: '#/components/schemas/Class'
     roleType:
       name: roleType
       in: query
-      description: Filtro por função. A API aceita entrada em qualquer caixa, ignorando acentuacao, e normaliza para o valor canonico.
+      description: Filtro por função. A API aceita entrada em qualquer caixa, ignorando acentuação, e normaliza para o valor canônico.
       schema:
         $ref: '#/components/schemas/RoleType'
     characterNamePath:
       name: characterName
       in: path
       required: true
-      description: Nome do personagem. A identificacao deve ser case-insensitive.
+      description: Nome do personagem. A identificação deve ser case-insensitive.
       schema:
         type: string
     page:
       name: page
       in: query
-      description: Numero da pagina, iniciando em 1.
+      description: Número da página, iniciando em 1.
       schema:
         type: integer
         minimum: 1
@@ -433,7 +433,7 @@ components:
     pageSize:
       name: pageSize
       in: query
-      description: Quantidade de itens por pagina.
+      description: Quantidade de itens por página.
       schema:
         type: integer
         minimum: 1
@@ -442,21 +442,21 @@ components:
     sortBy:
       name: sortBy
       in: query
-      description: Campo utilizado para ordenacao.
+      description: Campo utilizado para ordenação.
       schema:
         type: string
         enum: [username, characterName, guildName, guildRank, race, class, roleType, createdAt]
     guildSortBy:
       name: sortBy
       in: query
-      description: Campo utilizado para ordenacao das guildas.
+      description: Campo utilizado para ordenação das guildas.
       schema:
         type: string
         enum: [guildName, leaderCharacterName, totalMembers, createdAt]
     sortOrder:
       name: sortOrder
       in: query
-      description: Direcao da ordenacao.
+      description: Direção da ordenação.
       schema:
         type: string
         enum: [asc, desc]
@@ -468,7 +468,7 @@ components:
       properties:
         username:
           type: string
-          description: Username unico globalmente, validado de forma case-insensitive.
+          description: Username único globalmente, validado de forma case-insensitive.
           example: thrall
         password:
           type: string
@@ -477,7 +477,7 @@ components:
           example: Senha@123
         characterName:
           type: string
-          description: Nome do personagem unico globalmente, validado de forma case-insensitive.
+          description: Nome do personagem único globalmente, validado de forma case-insensitive.
           example: Thrall
         race:
           $ref: '#/components/schemas/Race'
@@ -517,7 +517,7 @@ components:
       properties:
         guildName:
           type: string
-          description: Nome unico globalmente, validado de forma case-insensitive apos trim.
+          description: Nome único globalmente, validado de forma case-insensitive após trim.
           example: Filhos da Horda
       additionalProperties: false
     AddGuildMemberRequest:
@@ -680,19 +680,19 @@ components:
             $ref: '#/components/schemas/GuildListItemResponse'
     Race:
       type: string
-      description: A API aceita entrada em qualquer caixa, ignorando acentuacao, e normaliza para o valor canonico retornado abaixo.
+      description: A API aceita entrada em qualquer caixa, ignorando acentuação, e normaliza para o valor canônico retornado abaixo.
       enum: [Orc, Tauren, Troll, Morto-vivo]
     Class:
       type: string
-      description: A API aceita entrada em qualquer caixa, ignorando acentuacao, e normaliza para o valor canonico retornado abaixo.
+      description: A API aceita entrada em qualquer caixa, ignorando acentuação, e normaliza para o valor canônico retornado abaixo.
       enum: [Guerreiro, Cacador, Ladino, Xamã, Bruxo, Druida, Sacerdote, Mago]
     RoleType:
       type: string
-      description: A API aceita entrada em qualquer caixa, ignorando acentuacao, e normaliza para o valor canonico retornado abaixo.
+      description: A API aceita entrada em qualquer caixa, ignorando acentuação, e normaliza para o valor canônico retornado abaixo.
       enum: [Tank, Healer, DPS]
     GuildRank:
       type: string
-      description: Cargo do usuário na guilda. A API aceita entrada em qualquer caixa, ignorando acentuacao, e normaliza para o valor canonico.
+      description: Cargo do usuário na guilda. A API aceita entrada em qualquer caixa, ignorando acentuação, e normaliza para o valor canônico.
       enum: [Leader, Officer, Member]
     ErrorResponse:
       type: object
@@ -720,7 +720,7 @@ components:
           type: string
   responses:
     BadRequest:
-      description: Requisicao invalida
+      description: Requisição inválida
       content:
         application/json:
           schema:
@@ -751,7 +751,7 @@ components:
                 timestamp: '2026-04-24T00:00:00.000Z'
                 path: /users
     Forbidden:
-      description: Usuário sem permissao
+      description: Usuário sem permissão
       content:
         application/json:
           schema:
@@ -771,7 +771,7 @@ components:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
     Conflict:
-      description: Conflito de regra de negocio
+      description: Conflito de regra de negócio
       content:
         application/json:
           schema:
@@ -791,7 +791,7 @@ components:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
     TooManyRequests:
-      description: Limite de requisicoes excedido
+      description: Limite de requisições excedido
       content:
         application/json:
           schema:

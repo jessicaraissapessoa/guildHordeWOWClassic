@@ -61,9 +61,9 @@ Item ainda planejado:
 
 ## Regras importantes do domínio
 
-- `username`, `characterName` e `guildName` são únicos com comparação case-insensitive
+- `username`, `characterName` e `guildName` são únicos, com comparação case-insensitive
 - enums aceitam caixa variável e ignoram acentuação na entrada
-- combinações de `race + class + roleType` seguem as regras da Horda no WoW Classic
+- as combinações de `race + class + roleType` seguem as regras da Horda no WoW Classic
 - toda operação protegida revalida o estado atual no banco
 - operações críticas usam transação
 
@@ -94,7 +94,7 @@ Arquivos locais que não devem ser versionados:
 npm install
 ```
 
-2. Crie seus arquivos locais de ambiente a partir dos exemplos:
+2. Crie os arquivos locais de ambiente a partir dos exemplos:
 
 - `.env`
 - `.env.test`
@@ -105,7 +105,7 @@ npm install
 npm run db:init
 ```
 
-4. Suba a API:
+4. Inicie a API:
 
 ```bash
 npm run dev
@@ -127,25 +127,25 @@ http://localhost:3000/api-docs
 
 ## Testes
 
-Inicializar o banco de teste:
+Inicialize o banco de teste:
 
 ```bash
 npm run db:init:test
 ```
 
-Executar testes unitários:
+Execute os testes unitários:
 
 ```bash
 npm run test:unit
 ```
 
-Executar testes de integração/API:
+Execute os testes de integração/API:
 
 ```bash
 npm test
 ```
 
-Gerar relatório HTML dos testes de API:
+Gere o relatório HTML dos testes de API:
 
 ```bash
 npm run test:html
@@ -157,7 +157,7 @@ Relatório gerado em:
 test-reports/mochawesome/api-tests.html
 ```
 
-Executar testes de performance:
+Execute os testes de performance:
 
 ```bash
 npm run test:performance

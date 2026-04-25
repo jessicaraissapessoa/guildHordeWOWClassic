@@ -1,4 +1,4 @@
-# Visao Geral da API
+# Visão Geral da API
 
 ## Objetivo
 
@@ -15,21 +15,21 @@ Disponibilizar uma API REST para cadastro de usuários, autenticação, gestão 
 - Senhas: bcrypt
 - Contrato: OpenAPI/Swagger
 - Testes unitarios: Mocha e Chai
-- Testes de integracao/API: Mocha, Supertest, Chai e Mochawesome
+- Testes de integração/API: Mocha, Supertest, Chai e Mochawesome
 - Testes de performance: k6
 
 ## Padroes gerais
 
 - Formato de dados: JSON
 - Charset: UTF-8
-- Versão inicial: execucao local
+- Versão inicial: execução local
 - Autenticação: Bearer token JWT
-- Todos os endpoints, exceto cadastro e login, sao protegidos
-- Comparacoes de `username`, `characterName` e `guildName` sao case-insensitive
-- Valores de enum aceitam qualquer caixa na entrada, ignoram acentuacao na interpretacao e sao persistidos no formato canonico
+- Todos os endpoints, exceto cadastro e login, são protegidos
+- Comparações de `username`, `characterName` e `guildName` são case-insensitive
+- Valores de enum aceitam qualquer caixa na entrada, ignoram acentuação na interpretação e são persistidos no formato canônico
 - Métodos HTTP não suportados em rotas existentes devem retornar `405 Method Not Allowed`
-- Operacoes criticas devem ser atomicas e protegidas por transação
-- Falhas de autenticação e autorizacao não podem produzir efeito colateral
+- Operações críticas devem ser atômicas e protegidas por transação
+- Falhas de autenticação e autorização não podem produzir efeito colateral
 
 ## Dominios da API
 
@@ -43,5 +43,5 @@ Disponibilizar uma API REST para cadastro de usuários, autenticação, gestão 
 
 - Contrato OpenAPI: `docs/api/swagger/openapi.yaml`
 - Endpoints descritos em: `docs/api/endpoints.md`
-- Regras de negocio em: `docs/produto/regras-de-negocio.md`
+- Regras de negócio em: `docs/produto/regras-de-negocio.md`
 - Erros padronizados em: `docs/api/erros.md`

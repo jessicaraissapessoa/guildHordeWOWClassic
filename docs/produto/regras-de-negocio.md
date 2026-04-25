@@ -1,4 +1,4 @@
-# Regras de Negocio
+# Regras de Negócio
 
 ## RN-001 - Recursos protegidos exigem autenticação
 
@@ -8,106 +8,106 @@ Todos os endpoints exigem autenticação, exceto cadastro de usuário e login.
 
 ### Justificativa
 
-Evitar acesso indevido a dados e operacoes sensiveis.
+Evitar acesso indevido a dados e operações sensíveis.
 
-### Aplicacao
+### Aplicação
 
 - `POST /auth/register`
 - `POST /auth/login`
 - Todos os demais endpoints
 
-### Excecoes
+### Exceções
 
 - `POST /auth/register`
 - `POST /auth/login`
 
-## RN-002 - Autorizacao sempre revalida o estado atual no banco
+## RN-002 - Autorização sempre revalida o estado atual no banco
 
 ### Regra
 
-O token identifica o usuário autenticado, mas cargo, guilda e demais permissoes devem ser revalidados no banco nas operacoes protegidas.
+O token identifica o usuário autenticado, mas cargo, guilda e demais permissões devem ser revalidados no banco nas operações protegidas.
 
 ### Justificativa
 
-Evitar uso indevido de tokens antigos apos mudancas de cargo, guilda ou delecao.
+Evitar uso indevido de tokens antigos após mudanças de cargo, guilda ou deleção.
 
-### Aplicacao
+### Aplicação
 
-- Todas as operacoes protegidas
+- Todas as operações protegidas
 
-## RN-003 - Username e unico globalmente e case-insensitive
+## RN-003 - Username é único globalmente e case-insensitive
 
 ### Regra
 
-`username` deve ser unico globalmente, comparado de forma case-insensitive e armazenado com um campo normalizado em lowercase.
+`username` deve ser único globalmente, comparado de forma case-insensitive e armazenado com um campo normalizado em lowercase.
 
 ### Justificativa
 
-Garantir identificacao consistente para login e busca.
+Garantir identificação consistente para login e busca.
 
-### Aplicacao
+### Aplicação
 
 - Cadastro de usuário
 - Login
 - `GET /users`
 
-## RN-004 - Character name e unico globalmente e case-insensitive
+## RN-004 - Character name é único globalmente e case-insensitive
 
 ### Regra
 
-`characterName` deve ser unico globalmente, comparado de forma case-insensitive e armazenado com um campo normalizado.
+`characterName` deve ser único globalmente, comparado de forma case-insensitive e armazenado com um campo normalizado.
 
 ### Justificativa
 
-Evitar ambiguidade em operacoes por nome do personagem.
+Evitar ambiguidade em operações por nome do personagem.
 
-### Aplicacao
+### Aplicação
 
 - Cadastro de usuário
 - Cadastro de integrante em guilda
 - Alteração de cargo
-- Remocao de integrante
+- Remoção de integrante
 - `GET /users`
 
-## RN-005 - Guild name e unico globalmente e case-insensitive
+## RN-005 - Guild name é único globalmente e case-insensitive
 
 ### Regra
 
-`guildName` deve ser unico globalmente, comparado de forma case-insensitive e armazenado com um campo normalizado apos `trim`.
+`guildName` deve ser único globalmente, comparado de forma case-insensitive e armazenado com um campo normalizado após `trim`.
 
 ### Justificativa
 
-Evitar duplicidade logica de guildas com diferenca apenas de caixa.
+Evitar duplicidade lógica de guildas com diferença apenas de caixa.
 
-### Aplicacao
+### Aplicação
 
-- Criacao de guilda
+- Criação de guilda
 - Listagem de integrantes por guilda
 
-## RN-006 - Campos obrigatorios não aceitam vazio nem apenas espacos
+## RN-006 - Campos obrigatórios não aceitam vazio nem apenas espaços
 
 ### Regra
 
-Nenhum campo obrigatorio aceita valor vazio, `null`, ou string composta apenas por espacos.
+Nenhum campo obrigatório aceita valor vazio, `null`, ou string composta apenas por espaços.
 
 ### Justificativa
 
-Garantir integridade dos dados e validacoes previsiveis.
+Garantir integridade dos dados e validações previsíveis.
 
-### Aplicacao
+### Aplicação
 
-- Todos os requests com payload ou query param obrigatorio
+- Todos os requests com payload ou query param obrigatório
 
-## RN-007 - Username segue padrao restritivo
+## RN-007 - Username segue padrão restritivo
 
 ### Regra
 
 `username` deve:
 
 - ter entre 3 e 30 caracteres
-- comecar com letra
-- aceitar apenas letras minusculas, numeros, ponto e underscore
-- não conter espacos
+- começar com letra
+- aceitar apenas letras minúsculas, números, ponto e underscore
+- não conter espaços
 - não terminar com ponto ou underscore
 - não conter `..`, `__`, `._` ou `_.`
 
@@ -115,35 +115,35 @@ Garantir integridade dos dados e validacoes previsiveis.
 
 Padronizar login e reduzir ambiguidades.
 
-### Aplicacao
+### Aplicação
 
 - Cadastro de usuário
 - Busca por `username`
 
-## RN-008 - Senha segue boas praticas e e armazenada com hash
+## RN-008 - Senha segue boas práticas e é armazenada com hash
 
 ### Regra
 
 A senha deve:
 
-- ter no minimo 8 caracteres
-- conter ao menos 1 letra maiuscula
-- conter ao menos 1 letra minuscula
-- conter ao menos 1 numero
+- ter no mínimo 8 caracteres
+- conter ao menos 1 letra maiúscula
+- conter ao menos 1 letra minúscula
+- conter ao menos 1 número
 - conter ao menos 1 símbolo
-- não conter espacos
+- não conter espaços
 - ser armazenada apenas como hash
 
 ### Justificativa
 
-Fortalecer seguranca da autenticação.
+Fortalecer a segurança da autenticação.
 
-### Aplicacao
+### Aplicação
 
 - Cadastro de usuário
 - Login
 
-## RN-009 - Nome do personagem segue regras do dominio
+## RN-009 - Nome do personagem segue regras do domínio
 
 ### Regra
 
@@ -152,77 +152,77 @@ Fortalecer seguranca da autenticação.
 - ter entre 2 e 12 caracteres
 - conter apenas letras
 - aceitar acentos
-- não aceitar numeros
-- não aceitar espacos
+- não aceitar números
+- não aceitar espaços
 - não aceitar símbolos
 - representar apenas um nome
 
 ### Justificativa
 
-Refletir as regras esperadas do dominio do jogo.
+Refletir as regras esperadas do domínio do jogo.
 
-### Aplicacao
+### Aplicação
 
 - Cadastro de usuário
 
-## RN-010 - Nome da guilda segue regras do dominio
+## RN-010 - Nome da guilda segue regras do domínio
 
 ### Regra
 
 `guildName` deve:
 
-- ter entre 2 e 24 caracteres apos `trim`
-- aceitar espacos internos
-- ignorar espacos no inicio e fim
-- não aceitar numeros
+- ter entre 2 e 24 caracteres após `trim`
+- aceitar espaços internos
+- ignorar espaços no início e fim
+- não aceitar números
 - não aceitar símbolos
 - não aceitar enfeites visuais
 
 ### Justificativa
 
-Padronizar nomes de guilda e evitar entradas invalidas.
+Padronizar nomes de guilda e evitar entradas inválidas.
 
-### Aplicacao
+### Aplicação
 
-- Criacao de guilda
+- Criação de guilda
 - Busca de integrantes por guilda
 
-## RN-011 - Valores de raça, classe, função e cargo sao controlados por enum
+## RN-011 - Valores de raça, classe, função e cargo são controlados por enum
 
 ### Regra
 
-Os campos `race`, `class`, `roleType` e `guildRank` aceitam somente valores pre-definidos. A API aceita entrada em qualquer caixa, ignorando acentuacao na interpretacao do enum, e persiste o valor canonico.
+Os campos `race`, `class`, `roleType` e `guildRank` aceitam somente valores predefinidos. A API aceita entrada em qualquer caixa, ignorando acentuação na interpretação do enum, e persiste o valor canônico.
 
 ### Justificativa
 
-Garantir consistencia no dominio e facilitar filtros.
+Garantir consistência no domínio e facilitar filtros.
 
-### Aplicacao
+### Aplicação
 
 - Cadastro de usuário
 - Alteração de função
 - Alteração de cargo
 - `GET /users`
 
-## RN-012 - Combinação de raça, classe e função deve ser valida
+## RN-012 - Combinação de raça, classe e função deve ser válida
 
 ### Regra
 
-Somente as combinacoes definidas para a Horda em WoW Classic sao permitidas:
+Somente as combinações definidas para a Horda em WoW Classic são permitidas:
 
-- Orc: Guerreiro(Tank, DPS), Cacador(DPS), Ladino(DPS), Xamã(Healer, DPS), Bruxo(DPS)
-- Tauren: Guerreiro(Tank, DPS), Cacador(DPS), Xamã(Healer, DPS), Druida(Tank, Healer, DPS)
-- Troll: Guerreiro(Tank, DPS), Cacador(DPS), Ladino(DPS), Sacerdote(Healer, DPS), Xamã(Healer, DPS), Mago(DPS)
+- Orc: Guerreiro(Tank, DPS), Caçador(DPS), Ladino(DPS), Xamã(Healer, DPS), Bruxo(DPS)
+- Tauren: Guerreiro(Tank, DPS), Caçador(DPS), Xamã(Healer, DPS), Druida(Tank, Healer, DPS)
+- Troll: Guerreiro(Tank, DPS), Caçador(DPS), Ladino(DPS), Sacerdote(Healer, DPS), Xamã(Healer, DPS), Mago(DPS)
 - Morto-vivo: Guerreiro(Tank, DPS), Ladino(DPS), Sacerdote(Healer, DPS), Mago(DPS), Bruxo(DPS)
 
 ### Justificativa
 
-Refletir as restricoes do dominio do jogo.
+Refletir as restrições do domínio do jogo.
 
-### Aplicacao
+### Aplicação
 
 - Cadastro de usuário
-- Alteração da propria função
+- Alteração da própria função
 
 ## RN-013 - Usuário sem guilda deve ficar sem cargo
 
@@ -234,13 +234,13 @@ Usuário sem guilda deve ter `guildId = null` e `guildRank = null`.
 
 Evitar cargos desvinculados de guilda.
 
-### Aplicacao
+### Aplicação
 
 - Cadastro de usuário
-- Saida da guilda
-- Delecao de guilda
+- Saída da guilda
+- Deleção de guilda
 
-## RN-014 - Criacao de guilda promove o autor a líder
+## RN-014 - Criação de guilda promove o autor a líder
 
 ### Regra
 
@@ -250,56 +250,56 @@ Ao criar uma guilda, o usuário autenticado passa a integrar a guilda criada com
 
 Toda guilda precisa nascer com um líder.
 
-### Aplicacao
+### Aplicação
 
-- Criacao de guilda
+- Criação de guilda
 
-## RN-015 - Usuário so pode pertencer a uma guilda por vez
+## RN-015 - Usuário só pode pertencer a uma guilda por vez
 
 ### Regra
 
-Um usuário pode estar vinculado a no maximo uma guilda.
+Um usuário pode estar vinculado a no máximo uma guilda.
 
 ### Justificativa
 
-Preservar integridade do dominio.
+Preservar a integridade do domínio.
 
-### Aplicacao
+### Aplicação
 
-- Criacao de guilda
+- Criação de guilda
 - Cadastro de integrante
-- Saida da guilda
-- Delecao de guilda
+- Saída da guilda
+- Deleção de guilda
 
-## RN-016 - Operacoes de guilda exigem pertencimento do autor a uma guilda
+## RN-016 - Operações de guilda exigem pertencimento do autor a uma guilda
 
 ### Regra
 
-Toda operacao relacionada a guilda so pode ser executada por usuário autenticado que pertença a uma guilda, alem de cumprir a permissao especifica da acao.
+Toda operação relacionada a guilda só pode ser executada por usuário autenticado que pertença a uma guilda, além de cumprir a permissão específica da ação.
 
 ### Justificativa
 
-Evitar acoes inconsistentes por usuários fora de guilda.
+Evitar ações inconsistentes por usuários fora de guilda.
 
-### Aplicacao
+### Aplicação
 
 - Cadastro de integrante
 - Alteração de cargo
-- Remocao de integrante
-- Saida da guilda
-- Delecao da guilda
+- Remoção de integrante
+- Saída da guilda
+- Deleção da guilda
 
 ## RN-017 - Cadastro de integrante sempre ocorre na guilda do autor
 
 ### Regra
 
-O usuário autenticado adiciona integrantes somente na propria guilda, e o alvo precisa existir e não pode estar em outra guilda.
+O usuário autenticado adiciona integrantes somente na própria guilda, e o alvo precisa existir e não pode estar em outra guilda.
 
 ### Justificativa
 
-Evitar associacoes cruzadas e incoerentes.
+Evitar associações cruzadas e incoerentes.
 
-### Aplicacao
+### Aplicação
 
 - Cadastro de integrante
 
@@ -313,15 +313,15 @@ Ao ser adicionado a uma guilda existente, o usuário entra automaticamente com c
 
 Padronizar a entrada de novos integrantes.
 
-### Aplicacao
+### Aplicação
 
 - Cadastro de integrante
 
-## RN-019 - Hierarquia de cargos controla alteração e remocao
+## RN-019 - Hierarquia de cargos controla alteração e remoção
 
 ### Regra
 
-A hierarquia e `Leader > Officer > Member`.
+A hierarquia é `Leader > Officer > Member`.
 
 - `Leader` pode alterar cargo para `Officer`, `Member` ou `Leader`
 - `Leader` pode remover `Officer` e `Member`
@@ -332,13 +332,13 @@ A hierarquia e `Leader > Officer > Member`.
 
 Preservar a cadeia de comando da guilda.
 
-### Aplicacao
+### Aplicação
 
 - Cadastro de integrante
 - Alteração de cargo
-- Remocao de integrante
+- Remoção de integrante
 
-## RN-020 - Somente líder pode transferir lideranca
+## RN-020 - Somente líder pode transferir liderança
 
 ### Regra
 
@@ -348,7 +348,7 @@ Somente o líder pode alterar o cargo de um integrante para `Leader`. O alvo dev
 
 Garantir unicidade do líder por guilda.
 
-### Aplicacao
+### Aplicação
 
 - Alteração de cargo
 
@@ -356,155 +356,155 @@ Garantir unicidade do líder por guilda.
 
 ### Regra
 
-Se o usuário autenticado for líder, ele não pode sair da guilda nem deletar a propria conta enquanto ainda mantiver a lideranca. Antes disso, deve transferir a lideranca ou deletar a guilda.
+Se o usuário autenticado for líder, ele não pode sair da guilda nem deletar a própria conta enquanto ainda mantiver a liderança. Antes disso, deve transferir a liderança ou deletar a guilda.
 
 ### Justificativa
 
 Evitar guildas sem líder.
 
-### Aplicacao
+### Aplicação
 
-- Saida da guilda
-- Delecao do proprio usuário
+- Saída da guilda
+- Deleção do próprio usuário
 
 ## RN-022 - Guilda pode ser deletada apenas pelo líder
 
 ### Regra
 
-Somente o líder da propria guilda pode deletar a guilda. Ao deletar, todos os integrantes passam a ficar com `guildId = null` e `guildRank = null`.
+Somente o líder da própria guilda pode deletar a guilda. Ao deletar, todos os integrantes passam a ficar com `guildId = null` e `guildRank = null`.
 
 ### Justificativa
 
-Garantir governanca da guilda e consistencia dos membros.
+Garantir governança da guilda e consistência dos membros.
 
-### Aplicacao
+### Aplicação
 
-- Delecao da guilda
+- Deleção da guilda
 
-## RN-023 - Usuário so pode deletar a propria conta
+## RN-023 - Usuário só pode deletar a própria conta
 
 ### Regra
 
-A delecao de usuário exige autenticação e so pode ser executada pelo proprio usuário autenticado.
+A deleção de usuário exige autenticação e só pode ser executada pelo próprio usuário autenticado.
 
 ### Justificativa
 
-Proteger contas de exclusao indevida.
+Proteger contas de exclusão indevida.
 
-### Aplicacao
+### Aplicação
 
-- Delecao do proprio usuário
+- Deleção do próprio usuário
 
-## RN-024 - Deletes sao hard delete na versão inicial
+## RN-024 - Deletes são hard delete na versão inicial
 
 ### Regra
 
-As operacoes de delecao de usuário e guilda removem definitivamente os registros, sem soft delete.
+As operações de deleção de usuário e guilda removem definitivamente os registros, sem soft delete.
 
 ### Justificativa
 
 Simplificar a primeira versão do projeto.
 
-### Aplicacao
+### Aplicação
 
-- Delecao do proprio usuário
-- Delecao da guilda
+- Deleção do próprio usuário
+- Deleção da guilda
 
-## RN-025 - Listagem de usuários suporta filtros, paginacao e ordenacao
+## RN-025 - Listagem de usuários suporta filtros, paginação e ordenação
 
 ### Regra
 
-`GET /users` deve suportar filtros opcionais por `username`, `characterName`, `guildName`, `guildRank`, `race`, `class` e `roleType`, alem de paginacao e ordenacao.
+`GET /users` deve suportar filtros opcionais por `username`, `characterName`, `guildName`, `guildRank`, `race`, `class` e `roleType`, além de paginação e ordenação.
 
 ### Justificativa
 
-Permitir tanto busca especifica quanto consultas exploratorias.
+Permitir tanto busca específica quanto consultas exploratórias.
 
-### Aplicacao
+### Aplicação
 
 - `GET /users`
 
-## RN-026 - Busca de integrantes por guilda e case-insensitive
+## RN-026 - Busca de integrantes por guilda é case-insensitive
 
 ### Regra
 
-Ao listar integrantes de uma guilda, a identificacao da guilda por nome deve ser case-insensitive.
+Ao listar integrantes de uma guilda, a identificação da guilda por nome deve ser case-insensitive.
 
 ### Justificativa
 
-Manter consistencia com a unicidade normalizada de `guildName`.
+Manter consistência com a unicidade normalizada de `guildName`.
 
-### Aplicacao
+### Aplicação
 
 - `GET /guilds/{guildName}/members`
 
-## RN-026A - Listagem de guildas suporta paginacao e ordenacao
+## RN-026A - Listagem de guildas suporta paginação e ordenação
 
 ### Regra
 
-`GET /guilds` deve listar todas as guildas cadastradas no sistema, exigindo autenticacao e suportando paginacao e ordenacao.
+`GET /guilds` deve listar todas as guildas cadastradas no sistema, exigindo autenticação e suportando paginação e ordenação.
 
 ### Justificativa
 
 Permitir consulta global de guildas de forma consistente com a API.
 
-### Aplicacao
+### Aplicação
 
 - `GET /guilds`
 
-## RN-027 - Senhas nunca devem ser persistidas ou logadas em texto puro
+## RN-027 - Senhas nunca devem ser persistidas ou registradas em texto puro
 
 ### Regra
 
-A senha pode chegar em texto puro na request de cadastro e login, mas não pode ser armazenada, logada ou retornada em responses.
+A senha pode chegar em texto puro na request de cadastro e login, mas não pode ser armazenada, registrada em logs ou retornada em responses.
 
 ### Justificativa
 
-Reduzir risco de exposicao de credenciais.
+Reduzir risco de exposição de credenciais.
 
-### Aplicacao
+### Aplicação
 
 - Cadastro de usuário
 - Login
-- Logs e auditoria da aplicacao
+- Logs e auditoria da aplicação
 
-## RN-028 - Operacoes criticas exigem transação e revalidacao
+## RN-028 - Operações críticas exigem transação e revalidação
 
 ### Regra
 
-Operacoes criticas devem executar em transação de banco com revalidacao do estado atual antes da escrita.
+Operações críticas devem executar em transação de banco com revalidação do estado atual antes da escrita.
 
 ### Justificativa
 
-Reduzir inconsistencias por concorrencia.
+Reduzir inconsistências por concorrência.
 
-### Aplicacao
+### Aplicação
 
-- Criacao de guilda
+- Criação de guilda
 - Cadastro de integrante
 - Alteração de cargo
-- Remocao de integrante
-- Saida da guilda
-- Delecao de guilda
-- Delecao de usuário
+- Remoção de integrante
+- Saída da guilda
+- Deleção de guilda
+- Deleção de usuário
 
 ## RN-029 - A API deve aplicar rate limit
 
 ### Regra
 
-Rotas sensiveis, especialmente autenticação, devem ter controle de taxa para reduzir abuso.
+Rotas sensíveis, especialmente autenticação, devem ter controle de taxa para reduzir abuso.
 
 ### Justificativa
 
-Mitigar forca bruta e uso abusivo.
+Mitigar força bruta e uso abusivo.
 
-### Aplicacao
+### Aplicação
 
 - Cadastro de usuário
 - Login
-- Demais rotas conforme estrategia tecnica
+- Demais rotas conforme estratégia técnica
 
-## RN-030 - A API deve manter auditoria basica
+## RN-030 - A API deve manter auditoria básica
 
 ### Regra
 
@@ -512,76 +512,76 @@ Entidades principais devem manter `createdAt` e `updatedAt`.
 
 ### Justificativa
 
-Dar rastreabilidade basica ao sistema.
+Dar rastreabilidade básica ao sistema.
 
-### Aplicacao
+### Aplicação
 
 - Usuários
 - Guildas
 
-## RN-031 - Falhas de autorizacao devem bloquear a operacao sem efeito colateral
+## RN-031 - Falhas de autorização devem bloquear a operação sem efeito colateral
 
 ### Regra
 
-Quando o usuário autenticado não atender aos requisitos de permissao, hierarquia ou pertencimento a guilda exigidos pela operacao, a API deve bloquear a acao e não pode produzir alteração parcial de estado.
+Quando o usuário autenticado não atender aos requisitos de permissão, hierarquia ou pertencimento à guilda exigidos pela operação, a API deve bloquear a ação e não pode produzir alteração parcial de estado.
 
 ### Justificativa
 
-Garantir seguranca e integridade das regras de acesso.
+Garantir segurança e integridade das regras de acesso.
 
-### Aplicacao
+### Aplicação
 
 - Cadastro de integrante
 - Alteração de cargo
-- Remocao de integrante
-- Saida da guilda
-- Delecao da guilda
-- Delecao do proprio usuário
+- Remoção de integrante
+- Saída da guilda
+- Deleção da guilda
+- Deleção do próprio usuário
 
 ## RN-032 - Métodos HTTP não suportados devem ser rejeitados
 
 ### Regra
 
-Quando um consumidor chamar uma rota existente com metodo HTTP não suportado, a API deve responder com `405 Method Not Allowed`.
+Quando um consumidor chamar uma rota existente com método HTTP não suportado, a API deve responder com `405 Method Not Allowed`.
 
 ### Justificativa
 
-Deixar o contrato previsivel e evitar uso incorreto dos endpoints.
+Deixar o contrato previsível e evitar uso incorreto dos endpoints.
 
-### Aplicacao
+### Aplicação
 
 - Todos os endpoints da API
 
-## RN-033 - Operacoes concorrentes devem ser atomicas e consistentes
+## RN-033 - Operações concorrentes devem ser atômicas e consistentes
 
 ### Regra
 
-Em cenarios concorrentes, a API deve garantir consistencia transacional. Quando duas operacoes conflitantes tentarem alterar o mesmo estado de guilda ou integrante, apenas o fluxo que satisfizer as pre-condicoes no momento da escrita pode ser concluido; os demais devem falhar sem corromper dados.
+Em cenários concorrentes, a API deve garantir consistência transacional. Quando duas operações conflitantes tentarem alterar o mesmo estado de guilda ou integrante, apenas o fluxo que satisfizer as pré-condições no momento da escrita pode ser concluído; os demais devem falhar sem corromper dados.
 
 ### Justificativa
 
-Evitar estados impossiveis, como dois lideres, promocao e remocao simultaneas inconsistentes, ou guilda removida parcialmente.
+Evitar estados impossíveis, como dois líderes, promoção e remoção simultâneas inconsistentes, ou guilda removida parcialmente.
 
-### Aplicacao
+### Aplicação
 
-- Criacao de guilda
+- Criação de guilda
 - Cadastro de integrante
 - Alteração de cargo
-- Remocao de integrante
-- Saida da guilda
-- Delecao de guilda
-- Delecao de usuário
+- Remoção de integrante
+- Saída da guilda
+- Deleção de guilda
+- Deleção de usuário
 
-## RN-034 - Respostas de erro devem contemplar autenticação, autorizacao e seguranca
+## RN-034 - Respostas de erro devem contemplar autenticação, autorização e segurança
 
 ### Regra
 
-Chamadas sem token, com token invalido, expirado ou com permissao insuficiente devem retornar codigos coerentes e nunca expor informacoes sensiveis.
+Chamadas sem token, com token inválido, expirado ou com permissão insuficiente devem retornar códigos coerentes e nunca expor informações sensíveis.
 
 ### Justificativa
 
-Padronizar o comportamento da API diante de falhas de seguranca.
+Padronizar o comportamento da API diante de falhas de segurança.
 
-### Aplicacao
+### Aplicação
 
 - Todos os endpoints protegidos
