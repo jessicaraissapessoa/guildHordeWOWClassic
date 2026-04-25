@@ -28,6 +28,7 @@ Todas as mudanças relevantes da API devem ser registradas aqui.
 - README principal do repositório com visão geral do projeto, setup, testes e links para a documentação complementar.
 - Pipelines com GitHub Actions para CI e performance.
 - Publicação de artefatos do Mochawesome e dos sumários do k6 no GitHub Actions.
+- Estrutura-fonte da wiki em `docs/wiki-source` e publicação da wiki do GitHub com base na documentação do projeto.
 
 ### Alterado
 

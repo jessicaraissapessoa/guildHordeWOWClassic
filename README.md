@@ -179,6 +179,7 @@ docs/   documentação funcional, técnica e de testes
 
 ## Documentação complementar
 
+- [GitHub Wiki](https://github.com/jessicaraissapessoa/guildHordeWOWClassic/wiki)
 - [Visão geral da documentação](docs/README.md)
 - [Regras de negócio](docs/produto/regras-de-negocio.md)
 - [User stories](docs/produto/user-stories.md)
