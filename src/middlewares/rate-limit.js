@@ -1,6 +1,10 @@
 const rateLimit = require('express-rate-limit');
 
 function buildRateLimit(max, windowMs) {
+  if (process.env.NODE_ENV === 'test' || process.env.DISABLE_RATE_LIMIT === 'true') {
+    return (_req, _res, next) => next();
+  }
+
   return rateLimit({
     windowMs,
     limit: max,

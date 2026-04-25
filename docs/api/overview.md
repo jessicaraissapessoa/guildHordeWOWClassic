@@ -14,7 +14,7 @@ Disponibilizar uma API REST para cadastro de usuários, autenticação, gestão 
 - Autenticação: JWT com jsonwebtoken
 - Senhas: bcrypt
 - Contrato: OpenAPI/Swagger
-- Testes: Mocha, Supertest, Chai e Mochawesome
+- Testes: Mocha, Supertest, Chai, Mochawesome e k6
 
 ## Padroes gerais
 

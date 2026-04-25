@@ -1,6 +1,14 @@
 const dotenv = require('dotenv');
+const path = require('path');
 
-dotenv.config();
+const explicitEnv = process.env.ENV_FILE;
+const targetEnv = process.env.NODE_ENV === 'test' || process.argv.includes('--env=test')
+  ? '.env.test'
+  : '.env';
+
+dotenv.config({
+  path: explicitEnv || path.join(process.cwd(), targetEnv)
+});
 
 const required = [
   'DB_HOST',

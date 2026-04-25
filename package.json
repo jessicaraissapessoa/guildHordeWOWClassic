@@ -6,7 +6,11 @@
   "scripts": {
     "start": "node src/server.js",
     "dev": "node --watch src/server.js",
-    "db:init": "node src/scripts/init-db.js"
+    "db:init": "node src/scripts/init-db.js",
+    "db:init:test": "node src/scripts/init-db.js --env=test",
+    "test": "mocha --require test/setup.js \"test/api/**/*.spec.js\"",
+    "test:html": "mocha --require test/setup.js \"test/api/**/*.spec.js\" --reporter mochawesome --reporter-options reportDir=test-reports/mochawesome,reportFilename=api-tests,html=true,json=true",
+    "test:performance": "node test/performance/run-all.js"
   },
   "dependencies": {
     "bcrypt": "^6.0.0",
@@ -17,5 +21,11 @@
     "mysql2": "^3.11.3",
     "swagger-ui-express": "^5.0.1",
     "yamljs": "^0.3.0"
+  },
+  "devDependencies": {
+    "chai": "^4.5.0",
+    "mocha": "^10.8.2",
+    "mochawesome": "^7.1.4",
+    "supertest": "^7.2.2"
   }
 }

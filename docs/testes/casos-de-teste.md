@@ -6,11 +6,11 @@
 - Endpoint: `POST /auth/register`
 - Resultado esperado: cria usuário com hash de senha, sem guilda e sem cargo
 
-## CT-002 - Bloquear username duplicado ignorando caixa
+## CT-002 - Bloquear username duplicado
 
 - User story relacionada: US-001
 - Endpoint: `POST /auth/register`
-- Resultado esperado: retorna `409` ao tentar cadastrar `Thrall` e depois `thrall`
+- Resultado esperado: retorna `409` ao tentar cadastrar o mesmo `username` normalizado mais de uma vez. Como o campo aceita apenas letras minúsculas, a validação observável ocorre sobre o valor já normalizado
 
 ## CT-003 - Bloquear characterName duplicado ignorando caixa
 

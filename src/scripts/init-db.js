@@ -1,11 +1,19 @@
 const fs = require('fs');
 const path = require('path');
 const mysql = require('mysql2/promise');
+if (process.argv.includes('--env=test')) {
+  process.env.NODE_ENV = 'test';
+}
 const env = require('../config/env');
+
+function buildSchemaSql(databaseName, template) {
+  return template.replaceAll('guild_horde_wow_classic', databaseName);
+}
 
 async function run() {
   const schemaPath = path.join(__dirname, '../../sql/schema.sql');
-  const sql = fs.readFileSync(schemaPath, 'utf8');
+  const template = fs.readFileSync(schemaPath, 'utf8');
+  const sql = buildSchemaSql(env.db.database, template);
   const connection = await mysql.createConnection({
     host: env.db.host,
     port: env.db.port,
