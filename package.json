@@ -1,7 +1,7 @@
 {
   "name": "guildhordewowclassic",
   "version": "1.0.0",
-  "description": "API REST para gestao de guildas da Horda em World of Warcraft Classic.",
+  "description": "API REST para gestão de guildas da Horda em World of Warcraft Classic.",
   "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js",

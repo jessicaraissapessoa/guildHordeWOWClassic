@@ -25,7 +25,7 @@
 - Testes unitários com Mocha e Chai.
 - Testes de integração/API com Mocha, Supertest, Chai e Mochawesome.
 - Testes de performance com k6.
-- Pipeline CI com GitHub Actions.
+- Pipeline CI com GitHub Actions, previsto como etapa posterior.
 - Operações críticas devem ser transacionais e consistentes sob concorrência.
 - Rotas existentes devem rejeitar métodos HTTP não suportados com `405`.
 - A API deve possuir cobertura planejada de testes de performance para cenários críticos de leitura e escrita.

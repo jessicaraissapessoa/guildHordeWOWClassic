@@ -25,6 +25,7 @@ Todas as mudanças relevantes da API devem ser registradas aqui.
 - Suíte de testes unitários com Mocha e Chai cobrindo normalização, validadores, `AppError`, canonização de enums e regras puras de domínio.
 - Runner de performance que sobe uma instância temporária da API na porta `3010`.
 - Relatório HTML de testes em `test-reports/mochawesome/api-tests.html`.
+- README principal do repositório com visão geral do projeto, setup, testes e links para a documentação complementar.
 
 ### Alterado
 
@@ -32,3 +33,4 @@ Todas as mudanças relevantes da API devem ser registradas aqui.
 - Valor canônico da classe `Xamã`.
 - Middleware de rate limit para permitir desabilitação controlada em testes de performance.
 - Documentação de setup, testes automatizados, estratégia, performance e casos de teste para refletir a cobertura implementada.
+- Documentação geral para diferenciar funcionalidades já implementadas de itens ainda planejados, como GitHub Actions.
