@@ -10,7 +10,7 @@ Cadastra um novo usuário.
 
 ### Autenticação
 
-Publico.
+Público.
 
 ### Regras relacionadas
 
@@ -25,7 +25,7 @@ Autentica usuário e retorna JWT.
 
 ### Autenticação
 
-Publico.
+Público.
 
 ### Regras relacionadas
 
@@ -40,7 +40,7 @@ Publico.
 
 ### Descrição
 
-Deleta a propria conta do usuário autenticado.
+Deleta a própria conta do usuário autenticado.
 
 ### Autenticação
 
@@ -96,7 +96,7 @@ Protegido.
 
 ### Descrição
 
-Altera a função do proprio usuário autenticado.
+Altera a função do próprio usuário autenticado.
 
 ### Autenticação
 
@@ -248,7 +248,7 @@ Protegido.
 
 ### Descrição
 
-Remove integrante da guilda do autor respeitando hierarquia.
+Remove integrante da guilda do autor respeitando a hierarquia.
 
 ### Autenticação
 

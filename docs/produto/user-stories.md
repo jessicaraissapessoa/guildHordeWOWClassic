@@ -2,15 +2,15 @@
 
 ## US-001 - Cadastrar usuário
 
-### Epico
+### Épico
 
 EP-001 - Autenticação e Conta do Usuário
 
-### Historia
+### História
 
 Como visitante, quero criar uma conta para acessar os recursos da API.
 
-### Criterios de aceite
+### Critérios de aceite
 
 - Deve validar obrigatoriedade, formato e unicidade de `username` e `characterName`.
 - Deve validar `race`, `class` e `roleType`.
@@ -21,226 +21,226 @@ Como visitante, quero criar uma conta para acessar os recursos da API.
 
 ## US-002 - Realizar login
 
-### Epico
+### Épico
 
 EP-001 - Autenticação e Conta do Usuário
 
-### Historia
+### História
 
 Como usuário cadastrado, quero autenticar-me para acessar recursos protegidos.
 
-### Criterios de aceite
+### Critérios de aceite
 
 - Deve autenticar com `username` e `password`.
-- Deve rejeitar credenciais invalidas.
+- Deve rejeitar credenciais inválidas.
 - Deve retornar JWT assinado.
 - O token deve identificar o usuário autenticado.
 - Deve respeitar rate limit.
-- Não deve expor em resposta detalhes sensiveis sobre a senha.
+- Não deve expor em resposta detalhes sensíveis sobre a senha.
 
-## US-003 - Deletar o proprio usuário
+## US-003 - Deletar o próprio usuário
 
-### Epico
+### Épico
 
 EP-001 - Autenticação e Conta do Usuário
 
-### Historia
+### História
 
-Como usuário autenticado, quero deletar minha propria conta.
+Como usuário autenticado, quero deletar minha própria conta.
 
-### Criterios de aceite
+### Critérios de aceite
 
 - Deve exigir autenticação.
-- Deve permitir delecao apenas do proprio usuário autenticado.
+- Deve permitir deleção apenas do próprio usuário autenticado.
 - Se o usuário não for líder, a conta pode ser removida mesmo que esteja em guilda.
-- Se o usuário for líder, a delecao deve ser bloqueada enquanto ele continuar líder.
-- Requisicoes sem token, com token invalido ou expirado devem ser rejeitadas.
+- Se o usuário for líder, a deleção deve ser bloqueada enquanto ele continuar líder.
+- Requisições sem token, com token inválido ou expirado devem ser rejeitadas.
 
 ## US-004 - Criar guilda
 
-### Epico
+### Épico
 
 EP-002 - Ciclo de Vida da Guilda
 
-### Historia
+### História
 
-Como usuário autenticado sem guilda, quero criar uma guilda para lidera-la.
+Como usuário autenticado sem guilda, quero criar uma guilda para liderá-la.
 
-### Criterios de aceite
+### Critérios de aceite
 
 - Deve exigir autenticação.
-- Deve aceitar somente `guildName` valido.
-- Deve impedir criacao se o usuário ja estiver em uma guilda.
+- Deve aceitar somente `guildName` válido.
+- Deve impedir criação se o usuário já estiver em uma guilda.
 - Deve impedir nome de guilda duplicado.
 - Deve cadastrar o autor como `Leader`.
-- Requisicoes concorrentes para o mesmo nome de guilda não podem criar duplicidade.
+- Requisições concorrentes para o mesmo nome de guilda não podem criar duplicidade.
 
 ## US-005 - Listar guildas
 
-### Epico
+### Épico
 
 EP-002 - Ciclo de Vida da Guilda
 
-### Historia
+### História
 
 Como usuário autenticado, quero listar as guildas do sistema.
 
-### Criterios de aceite
+### Critérios de aceite
 
 - Deve exigir autenticação.
 - Deve listar todas as guildas cadastradas.
-- Deve suportar paginacao.
-- Deve suportar ordenacao.
-- Deve retornar ao menos nome da guilda, lider atual e quantidade de integrantes.
+- Deve suportar paginação.
+- Deve suportar ordenação.
+- Deve retornar ao menos nome da guilda, líder atual e quantidade de integrantes.
 
 ## US-006 - Deletar guilda
 
-### Epico
+### Épico
 
 EP-002 - Ciclo de Vida da Guilda
 
-### Historia
+### História
 
-Como líder, quero deletar a minha guilda quando eu decidir desfaze-la.
+Como líder, quero deletar a minha guilda quando eu decidir desfazê-la.
 
-### Criterios de aceite
+### Critérios de aceite
 
 - Deve exigir autenticação.
 - Deve exigir que o autor esteja em uma guilda.
-- Deve permitir a acao apenas ao líder da propria guilda.
+- Deve permitir a ação apenas ao líder da própria guilda.
 - Deve remover a guilda e deixar todos os integrantes com `guildId = null` e `guildRank = null`.
-- Deve bloquear a operacao para `Officer` e `Member`.
-- Deve falhar sem efeito parcial em cenarios concorrentes.
+- Deve bloquear a operação para `Officer` e `Member`.
+- Deve falhar sem efeito parcial em cenários concorrentes.
 
 ## US-007 - Listar integrantes de uma guilda
 
-### Epico
+### Épico
 
 EP-002 - Ciclo de Vida da Guilda
 
-### Historia
+### História
 
-Como usuário autenticado, quero consultar os integrantes de uma guilda para visualizar sua composicao.
+Como usuário autenticado, quero consultar os integrantes de uma guilda para visualizar sua composição.
 
-### Criterios de aceite
+### Critérios de aceite
 
 - Deve exigir autenticação.
 - Deve receber `guildName`.
 - A busca por `guildName` deve ser case-insensitive.
 - Deve retornar nome do personagem, guilda, cargo, raça, classe e função dos integrantes.
-- Deve rejeitar requisicoes sem token ou com token invalido.
+- Deve rejeitar requisições sem token ou com token inválido.
 
 ## US-008 - Cadastrar integrante na guilda
 
-### Epico
+### Épico
 
 EP-003 - Gestão de Integrantes e Hierarquia
 
-### Historia
+### História
 
-Como líder ou oficial, quero adicionar um usuário sem guilda a minha guilda.
+Como líder ou oficial, quero adicionar um usuário sem guilda à minha guilda.
 
-### Criterios de aceite
+### Critérios de aceite
 
 - Deve exigir autenticação.
-- Deve permitir a acao somente para `Leader` ou `Officer`.
+- Deve permitir a ação somente para `Leader` ou `Officer`.
 - O autor deve pertencer a uma guilda.
 - O alvo deve existir e estar sem guilda.
 - O alvo deve entrar automaticamente como `Member`.
 - Deve bloquear `Member` e usuário sem guilda.
-- Deve falhar sem duplicar entrada em cenarios concorrentes.
+- Deve falhar sem duplicar entrada em cenários concorrentes.
 
 ## US-009 - Alterar cargo de integrante
 
-### Epico
+### Épico
 
 EP-003 - Gestão de Integrantes e Hierarquia
 
-### Historia
+### História
 
 Como líder, quero alterar o cargo de um integrante da minha guilda.
 
-### Criterios de aceite
+### Critérios de aceite
 
 - Deve exigir autenticação.
-- Deve permitir a acao somente para `Leader`.
+- Deve permitir a ação somente para `Leader`.
 - O alvo deve ser integrante da mesma guilda.
 - Deve permitir `Officer`, `Member` e `Leader`.
-- Ao transferir lideranca, o líder atual deve passar automaticamente a `Member`.
+- Ao transferir liderança, o líder atual deve passar automaticamente a `Member`.
 - Deve bloquear `Officer`, `Member` e usuário fora da guilda do alvo.
 - Deve impedir estados concorrentes com mais de um líder.
 
 ## US-010 - Remover integrante da guilda
 
-### Epico
+### Épico
 
 EP-003 - Gestão de Integrantes e Hierarquia
 
-### Historia
+### História
 
-Como integrante com permissao suficiente, quero remover integrantes de hierarquia inferior da minha guilda.
+Como integrante com permissão suficiente, quero remover integrantes de hierarquia inferior da minha guilda.
 
-### Criterios de aceite
+### Critérios de aceite
 
 - Deve exigir autenticação.
 - O autor deve pertencer a uma guilda.
 - `Leader` pode remover `Officer` e `Member`.
 - `Officer` pode remover apenas `Member`.
-- Ninguem pode remover integrante de mesmo cargo ou cargo superior.
+- Ninguém pode remover integrante de mesmo cargo ou cargo superior.
 - `Leader` não pode remover a si mesmo.
-- Deve bloquear requisicoes feitas por usuário sem guilda.
-- Deve falhar sem efeito parcial em disputa concorrente com alteração de cargo ou delecao de guilda.
+- Deve bloquear requisições feitas por usuário sem guilda.
+- Deve falhar sem efeito parcial em disputa concorrente com alteração de cargo ou deleção de guilda.
 
 ## US-011 - Sair da guilda
 
-### Epico
+### Épico
 
 EP-003 - Gestão de Integrantes e Hierarquia
 
-### Historia
+### História
 
 Como integrante de uma guilda, quero sair da guilda atual quando permitido pelas regras.
 
-### Criterios de aceite
+### Critérios de aceite
 
 - Deve exigir autenticação.
 - O usuário deve pertencer a uma guilda.
 - Se não for líder, deve sair da guilda e ficar com `guildId = null` e `guildRank = null`.
-- Se for líder, deve bloquear a saida enquanto ele ainda mantiver a lideranca.
-- Deve bloquear requisicoes sem token, com token invalido ou por usuário sem guilda.
+- Se for líder, deve bloquear a saída enquanto ele ainda mantiver a liderança.
+- Deve bloquear requisições sem token, com token inválido ou por usuário sem guilda.
 
-## US-012 - Alterar a propria função
+## US-012 - Alterar a própria função
 
-### Epico
+### Épico
 
-EP-004 - Consulta e Manutencao de Dados de Dominio
+EP-004 - Consulta e Manutenção de Dados de Domínio
 
-### Historia
+### História
 
-Como usuário autenticado, quero alterar minha propria função para manter meu personagem coerente com o que estou jogando.
+Como usuário autenticado, quero alterar minha própria função para manter meu personagem coerente com o que estou jogando.
 
-### Criterios de aceite
+### Critérios de aceite
 
 - Deve exigir autenticação.
-- Deve alterar apenas a função do proprio usuário autenticado.
+- Deve alterar apenas a função do próprio usuário autenticado.
 - Deve validar a combinação resultante entre `race`, `class` e `roleType`.
-- Deve rejeitar token ausente, invalido ou expirado.
+- Deve rejeitar token ausente, inválido ou expirado.
 
 ## US-013 - Listar usuários
 
-### Epico
+### Épico
 
-EP-004 - Consulta e Manutencao de Dados de Dominio
+EP-004 - Consulta e Manutenção de Dados de Domínio
 
-### Historia
+### História
 
 Como usuário autenticado, quero listar usuários do sistema com filtros para localizar personagens e integrantes.
 
-### Criterios de aceite
+### Critérios de aceite
 
 - Deve exigir autenticação.
 - Deve listar usuários com e sem guilda.
 - Deve suportar filtros por `username`, `characterName`, `guildName`, `guildRank`, `race`, `class` e `roleType`.
-- Deve suportar paginacao.
-- Deve suportar ordenacao.
-- Deve rejeitar metodos HTTP não suportados para a rota.
+- Deve suportar paginação.
+- Deve suportar ordenação.
+- Deve rejeitar métodos HTTP não suportados para a rota.

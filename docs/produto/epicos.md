@@ -1,22 +1,22 @@
-# Epicos
+# Épicos
 
 ## EP-001 - Autenticação e Conta do Usuário
 
 ### Objetivo
 
-Permitir cadastro, login e exclusao segura da propria conta.
+Permitir cadastro, login e exclusão segura da própria conta.
 
 ### Escopo
 
 - Cadastro de usuário.
 - Login.
-- Delecao do proprio usuário.
+- Deleção do próprio usuário.
 
 ### User stories relacionadas
 
 - US-001 - Cadastrar usuário
 - US-002 - Realizar login
-- US-003 - Deletar o proprio usuário
+- US-003 - Deletar o próprio usuário
 
 ## EP-002 - Ciclo de Vida da Guilda
 
@@ -26,9 +26,9 @@ Permitir que usuários criem, desfaçam e consultem guildas e seus integrantes.
 
 ### Escopo
 
-- Criacao de guilda.
+- Criação de guilda.
 - Listagem de guildas.
-- Delecao de guilda.
+- Deleção de guilda.
 - Listagem de integrantes por guilda.
 
 ### User stories relacionadas
@@ -42,7 +42,7 @@ Permitir que usuários criem, desfaçam e consultem guildas e seus integrantes.
 
 ### Objetivo
 
-Permitir cadastro, remocao e administracao de integrantes respeitando a hierarquia de cargos.
+Permitir cadastro, remoção e administração de integrantes respeitando a hierarquia de cargos.
 
 ### Escopo
 
@@ -59,18 +59,18 @@ Permitir cadastro, remocao e administracao de integrantes respeitando a hierarqu
 - US-010 - Remover integrante da guilda
 - US-011 - Sair da guilda
 
-## EP-004 - Consulta e Manutencao de Dados de Dominio
+## EP-004 - Consulta e Manutenção de Dados de Domínio
 
 ### Objetivo
 
-Permitir consulta de usuários com filtros e manutencao da propria função respeitando as regras do dominio.
+Permitir consulta de usuários com filtros e manutenção da própria função respeitando as regras do domínio.
 
 ### Escopo
 
-- Alterar a propria função.
-- Listar usuários com filtros, paginacao e ordenacao.
+- Alterar a própria função.
+- Listar usuários com filtros, paginação e ordenação.
 
 ### User stories relacionadas
 
-- US-012 - Alterar a propria função
+- US-012 - Alterar a própria função
 - US-013 - Listar usuários

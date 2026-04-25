@@ -1,42 +1,42 @@
 # Autenticação
 
-## Visao geral
+## Visão geral
 
-A API usa JWT Bearer Token. O token identifica o usuário autenticado, e as permissoes efetivas sao revalidadas no banco nas operacoes protegidas.
+A API usa JWT Bearer Token. O token identifica o usuário autenticado, e as permissões efetivas são revalidadas no banco nas operações protegidas.
 
 ## Fluxos
 
 ### Cadastro
 
-- Endpoint publico: `POST /auth/register`
+- Endpoint público: `POST /auth/register`
 - Recebe `username`, `password`, `characterName`, `race`, `class` e `roleType`
 - Persiste senha somente como hash
 
 ### Login
 
-- Endpoint publico: `POST /auth/login`
+- Endpoint público: `POST /auth/login`
 - Recebe `username` e `password`
 - Valida credenciais e retorna token JWT
 
 ### Acesso a rotas protegidas
 
 - Cliente envia `Authorization: Bearer <token>`
-- Middleware valida assinatura e expiracao do token
+- Middleware valida assinatura e expiração do token
 - API extrai o identificador do usuário autenticado
-- API consulta o banco para validar existencia, guilda atual e cargo atual quando necessario
+- API consulta o banco para validar existência, guilda atual e cargo atual quando necessário
 
-## Conteudo minimo do token
+## Conteúdo mínimo do token
 
-O token deve carregar apenas dados minimos necessarios para identificacao, como:
+O token deve carregar apenas dados mínimos necessários para identificação, como:
 
 - `sub`: id do usuário
-- `username`: username normalizado ou valor original, conforme estrategia tecnica
+- `username`: username normalizado ou valor original, conforme estratégia técnica
 
-Observacao:
+Observação:
 
-- `guildRank` e `guildId` não devem ser fonte unica de autorizacao
+- `guildRank` e `guildId` não devem ser fonte única de autorização
 
-## Rotas publicas
+## Rotas públicas
 
 - `POST /auth/register`
 - `POST /auth/login`

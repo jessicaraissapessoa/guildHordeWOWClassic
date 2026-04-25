@@ -20,12 +20,12 @@ Campos principais:
 - `createdAt`
 - `updatedAt`
 
-Restricoes:
+Restrições:
 
-- `usernameNormalized` unico
-- `characterNameNormalized` unico
-- `guildRank` so pode existir quando `guildId` existir
-- `race`, `class`, `roleType` e `guildRank` limitados aos enums da aplicacao
+- `usernameNormalized` único
+- `characterNameNormalized` único
+- `guildRank` só pode existir quando `guildId` existir
+- `race`, `class`, `roleType` e `guildRank` limitados aos enums da aplicação
 
 ### Guilda
 
@@ -37,25 +37,25 @@ Campos principais:
 - `createdAt`
 - `updatedAt`
 
-Restricoes:
+Restrições:
 
-- `guildNameNormalized` unico
+- `guildNameNormalized` único
 
 ## Relacionamentos
 
 - Uma guilda possui muitos usuários.
 - Um usuário pertence a zero ou uma guilda.
 
-## Indices recomendados
+## Índices recomendados
 
 - `users.username_normalized` unique
 - `users.character_name_normalized` unique
 - `users.guild_id`
 - `guilds.guild_name_normalized` unique
 
-## Observacoes de modelagem
+## Observações de modelagem
 
-- `username`, `characterName` e `guildName` devem preservar o valor de exibicao original.
-- A validacao de unicidade deve usar os campos normalizados.
-- A regra de combinação valida entre `race`, `class` e `roleType` deve ficar centralizada na camada de dominio/servico.
-- Operacoes criticas devem usar transação e revalidacao do estado atual.
+- `username`, `characterName` e `guildName` devem preservar o valor de exibição original.
+- A validação de unicidade deve usar os campos normalizados.
+- A regra de combinação válida entre `race`, `class` e `roleType` deve ficar centralizada na camada de domínio/serviço.
+- Operações críticas devem usar transação e revalidação do estado atual.

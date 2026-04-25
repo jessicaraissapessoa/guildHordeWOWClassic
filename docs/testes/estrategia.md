@@ -1,30 +1,30 @@
-# Estrategia de Testes
+# Estratégia de Testes
 
 ## Objetivo
 
-Garantir que as regras de negocio, validacoes e endpoints principais funcionem corretamente.
+Garantir que as regras de negócio, validações e endpoints principais funcionem corretamente.
 
 ## Stack de testes
 
-- Mocha para testes unitarios e de integracao/API
-- Chai para assercoes
-- Supertest para chamadas HTTP nos testes de integracao/API
-- Mochawesome para relatorio HTML/JSON da suite de API
+- Mocha para testes unitários e de integração/API
+- Chai para asserções
+- Supertest para chamadas HTTP nos testes de integração/API
+- Mochawesome para relatório HTML/JSON da suíte de API
 - k6 para testes de performance
 
 ## Tipos de teste
 
-### Unitarios
+### Unitários
 
-Testam funcoes puras, normalizacao, validadores, `AppError`, matriz de combinacoes `race + class + roleType` e regras de hierarquia.
+Testam funções puras, normalização, validadores, `AppError`, matriz de combinações `race + class + roleType` e regras de hierarquia.
 
-### Integracao
+### Integração
 
 Testam controllers, rotas, banco de dados, autenticação e fluxo entre camadas.
 
 ### API
 
-Testam os endpoints via HTTP, cobrindo payload, status code, headers, seguranca e efeitos no banco.
+Testam os endpoints via HTTP, cobrindo payload, status code, headers, segurança e efeitos no banco.
 
 ### Performance
 
@@ -33,32 +33,32 @@ Testam tempo de resposta, estabilidade e comportamento sob carga nos endpoints m
 ## Prioridades de cobertura
 
 - Cadastro e login
-- Validacoes de `username`, `password`, `characterName` e `guildName`
+- Validações de `username`, `password`, `characterName` e `guildName`
 - Unicidade case-insensitive
-- Combinacoes validas de `race`, `class` e `roleType`
-- Normalizacao de enums ignorando acentuacao
+- Combinações válidas de `race`, `class` e `roleType`
+- Normalização de enums ignorando acentuação
 - Hierarquia `Leader > Officer > Member`
-- Criacao e delecao de guilda
+- Criação e deleção de guilda
 - Listagem de guildas
-- Entrada e saida de integrantes
-- Filtros, paginacao e ordenacao de `GET /users`
-- Requisicoes sem autenticação, com token invalido e com token expirado
-- Requisicoes com permissao insuficiente
+- Entrada e saída de integrantes
+- Filtros, paginação e ordenação de `GET /users`
+- Requisições sem autenticação, com token inválido e com token expirado
+- Requisições com permissão insuficiente
 - Métodos HTTP indevidos
-- Comportamento esperado em concorrencia
-- Respostas sem vazamento de informacoes sensiveis
-- Performance de login, listagem de usuários e operacoes criticas de guilda
+- Comportamento esperado em concorrência
+- Respostas sem vazamento de informações sensíveis
+- Performance de login, listagem de usuários e operações críticas de guilda
 
 ## Diretrizes
 
-- Cada regra de negocio importante deve ter pelo menos um caso de teste.
-- Regras puras e utilitarios devem preferencialmente ser cobertos por testes unitarios antes da cobertura integrada.
-- Toda correcao de bug deve ganhar teste automatizado quando possivel.
-- Testes de erro devem validar tanto o status code quanto o codigo padronizado de erro.
-- Operacoes criticas devem ter cenarios que cubram revalidacao e concorrencia sempre que viavel.
-- Endpoints protegidos devem ter cobertura minima para `401`, `403` e fluxo autorizado.
-- Endpoints de escrita devem ter cenarios negativos para usuários sem requisito funcional da acao.
-- Pelo menos uma rota por grupo funcional deve ter teste explicito de `405 Method Not Allowed`.
+- Cada regra de negócio importante deve ter pelo menos um caso de teste.
+- Regras puras e utilitários devem preferencialmente ser cobertos por testes unitários antes da cobertura integrada.
+- Toda correção de bug deve ganhar teste automatizado quando possível.
+- Testes de erro devem validar tanto o status code quanto o código padronizado de erro.
+- Operações críticas devem ter cenários que cubram revalidação e concorrência sempre que viável.
+- Endpoints protegidos devem ter cobertura mínima para `401`, `403` e fluxo autorizado.
+- Endpoints de escrita devem ter cenários negativos para usuários sem requisito funcional da ação.
+- Pelo menos uma rota por grupo funcional deve ter teste explícito de `405 Method Not Allowed`.
 - Testes de performance devem ser isolados dos testes funcionais regulares para evitar falsos positivos.
 
 ## Performance
@@ -75,40 +75,40 @@ Escopo inicial recomendado:
 
 Objetivos iniciais:
 
-- medir latencia media e percentis sob carga controlada
-- identificar regressao perceptivel entre versoes
+- medir latência média e percentis sob carga controlada
+- identificar regressão perceptível entre versões
 - validar estabilidade sem erro funcional indevido
-- observar impacto de concorrencia nas operacoes criticas
+- observar impacto de concorrência nas operações críticas
 
 Indicadores sugeridos:
 
-- tempo medio de resposta
+- tempo médio de resposta
 - p95 e p99
 - throughput
 - taxa de erro
-- consistencia final de dados apos carga
+- consistência final de dados após carga
 
-## Matriz minima esperada por endpoint protegido
+## Matriz mínima esperada por endpoint protegido
 
 - Sem token: `401`
-- Token invalido ou expirado: `401`
-- Usuário autenticado sem permissao: `403` quando aplicavel
+- Token inválido ou expirado: `401`
+- Usuário autenticado sem permissão: `403` quando aplicável
 - Método indevido: `405`
 - Sucesso com efeito esperado
-- Falha de regra de negocio sem efeito colateral
+- Falha de regra de negócio sem efeito colateral
 
-## Concorrencia
+## Concorrência
 
-Os testes de concorrencia devem validar ao menos estes cenarios:
+Os testes de concorrência devem validar ao menos estes cenários:
 
-- duas criacoes simultaneas da mesma guilda
-- transferencia de lideranca concorrendo com remocao do mesmo alvo
-- delecao da guilda concorrendo com entrada ou saida de integrante
-- promocao ou remocao concorrente do mesmo integrante
+- duas criações simultâneas da mesma guilda
+- transferência de liderança concorrendo com remoção do mesmo alvo
+- deleção da guilda concorrendo com entrada ou saída de integrante
+- promoção ou remoção concorrente do mesmo integrante
 
 Resultado esperado:
 
-- no maximo uma operacao conclui quando houver conflito direto
+- no máximo uma operação conclui quando houver conflito direto
 - o estado final permanece consistente
-- não pode haver dois lideres na mesma guilda
-- não pode haver usuário vinculado a guilda removida
+- não pode haver dois líderes na mesma guilda
+- não pode haver usuário vinculado à guilda removida

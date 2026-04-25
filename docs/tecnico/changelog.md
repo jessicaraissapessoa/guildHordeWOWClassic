@@ -1,34 +1,34 @@
 # Changelog
 
-Todas as mudancas relevantes da API devem ser registradas aqui.
+Todas as mudanças relevantes da API devem ser registradas aqui.
 
-## [Não lancado]
+## [Não lançado]
 
 ### Adicionado
 
-- Estrutura inicial de documentacao.
-- Regras de negocio consolidadas da API.
-- Epicos e user stories alinhados ao escopo atual.
-- Endpoints documentados conforme a definicao funcional.
-- Contrato OpenAPI inicial com schemas, enums e seguranca.
+- Estrutura inicial de documentação.
+- Regras de negócio consolidadas da API.
+- Épicos e user stories alinhados ao escopo atual.
+- Endpoints documentados conforme a definição funcional.
+- Contrato OpenAPI inicial com schemas, enums e segurança.
 - Modelo de dados inicial com campos normalizados para unicidade case-insensitive.
-- Requisitos tecnicos, setup local e estrategia de testes alinhados a stack definida.
-- Implementacao inicial da API em Node.js, Express e MySQL.
-- Exposicao local do Swagger em `/api-docs`.
-- Script de inicializacao de banco em `npm run db:init`.
-- Implementacao da listagem paginada de guildas.
+- Requisitos técnicos, setup local e estratégia de testes alinhados à stack definida.
+- Implementação inicial da API em Node.js, Express e MySQL.
+- Exposição local do Swagger em `/api-docs`.
+- Script de inicialização de banco em `npm run db:init`.
+- Implementação da listagem paginada de guildas.
 - Ambiente de teste isolado com `.env.test` e `npm run db:init:test`.
 - Arquivo `.env.test.example` e ajuste do `.gitignore` para evitar versionamento de segredos de teste.
-- Suite automatizada de API com Mocha, Supertest, Chai e Mochawesome cobrindo `CT-001` a `CT-047`.
-- Suite de concorrencia com cenarios concorrentes para criacao de guilda, cadastro de integrante, transferencia de lideranca, remocao e delecao de guilda.
-- Suite de performance com k6 cobrindo `CPT-001` a `CPT-006`.
-- Suite de testes unitarios com Mocha e Chai cobrindo normalizacao, validadores, `AppError`, canonizacao de enums e regras puras de dominio.
-- Runner de performance que sobe uma instancia temporaria da API na porta `3010`.
-- Relatorio HTML de testes em `test-reports/mochawesome/api-tests.html`.
+- Suíte automatizada de API com Mocha, Supertest, Chai e Mochawesome cobrindo `CT-001` a `CT-047`.
+- Suíte de concorrência com cenários concorrentes para criação de guilda, cadastro de integrante, transferência de liderança, remoção e deleção de guilda.
+- Suíte de performance com k6 cobrindo `CPT-001` a `CPT-006`.
+- Suíte de testes unitários com Mocha e Chai cobrindo normalização, validadores, `AppError`, canonização de enums e regras puras de domínio.
+- Runner de performance que sobe uma instância temporária da API na porta `3010`.
+- Relatório HTML de testes em `test-reports/mochawesome/api-tests.html`.
 
 ### Alterado
 
-- Normalizacao de enums para aceitar caixa e acentuacao variaveis na entrada e persistir valor canonico.
-- Valor canonico da classe `Xamã`.
-- Middleware de rate limit para permitir desabilitacao controlada em testes de performance.
-- Documentacao de setup, testes automatizados, estrategia, performance e casos de teste para refletir a cobertura implementada.
+- Normalização de enums para aceitar caixa e acentuação variáveis na entrada e persistir valor canônico.
+- Valor canônico da classe `Xamã`.
+- Middleware de rate limit para permitir desabilitação controlada em testes de performance.
+- Documentação de setup, testes automatizados, estratégia, performance e casos de teste para refletir a cobertura implementada.
