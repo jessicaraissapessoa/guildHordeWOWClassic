@@ -36,7 +36,7 @@ paths:
                   password: Senha@123
                   characterName: Thrall
                   race: orc
-                  class: xama
+                  class: xamã
                   roleType: dps
       responses:
         '201':
@@ -400,19 +400,19 @@ components:
     race:
       name: race
       in: query
-      description: Filtro por raça. A API aceita entrada em qualquer caixa e normaliza para o valor canonico.
+      description: Filtro por raça. A API aceita entrada em qualquer caixa, ignorando acentuacao, e normaliza para o valor canonico.
       schema:
         $ref: '#/components/schemas/Race'
     class:
       name: class
       in: query
-      description: Filtro por classe. A API aceita entrada em qualquer caixa e normaliza para o valor canonico.
+      description: Filtro por classe. A API aceita entrada em qualquer caixa, ignorando acentuacao, e normaliza para o valor canonico.
       schema:
         $ref: '#/components/schemas/Class'
     roleType:
       name: roleType
       in: query
-      description: Filtro por função. A API aceita entrada em qualquer caixa e normaliza para o valor canonico.
+      description: Filtro por função. A API aceita entrada em qualquer caixa, ignorando acentuacao, e normaliza para o valor canonico.
       schema:
         $ref: '#/components/schemas/RoleType'
     characterNamePath:
@@ -680,19 +680,19 @@ components:
             $ref: '#/components/schemas/GuildListItemResponse'
     Race:
       type: string
-      description: A API aceita entrada em qualquer caixa e normaliza para o valor canonico retornado abaixo.
+      description: A API aceita entrada em qualquer caixa, ignorando acentuacao, e normaliza para o valor canonico retornado abaixo.
       enum: [Orc, Tauren, Troll, Morto-vivo]
     Class:
       type: string
-      description: A API aceita entrada em qualquer caixa e normaliza para o valor canonico retornado abaixo.
-      enum: [Guerreiro, Cacador, Ladino, Xama, Bruxo, Druida, Sacerdote, Mago]
+      description: A API aceita entrada em qualquer caixa, ignorando acentuacao, e normaliza para o valor canonico retornado abaixo.
+      enum: [Guerreiro, Cacador, Ladino, Xamã, Bruxo, Druida, Sacerdote, Mago]
     RoleType:
       type: string
-      description: A API aceita entrada em qualquer caixa e normaliza para o valor canonico retornado abaixo.
+      description: A API aceita entrada em qualquer caixa, ignorando acentuacao, e normaliza para o valor canonico retornado abaixo.
       enum: [Tank, Healer, DPS]
     GuildRank:
       type: string
-      description: Cargo do usuário na guilda.
+      description: Cargo do usuário na guilda. A API aceita entrada em qualquer caixa, ignorando acentuacao, e normaliza para o valor canonico.
       enum: [Leader, Officer, Member]
     ErrorResponse:
       type: object

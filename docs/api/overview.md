@@ -24,7 +24,7 @@ Disponibilizar uma API REST para cadastro de usuários, autenticação, gestão 
 - Autenticação: Bearer token JWT
 - Todos os endpoints, exceto cadastro e login, sao protegidos
 - Comparacoes de `username`, `characterName` e `guildName` sao case-insensitive
-- Valores de enum aceitam qualquer caixa na entrada e sao persistidos no formato canonico
+- Valores de enum aceitam qualquer caixa na entrada, ignoram acentuacao na interpretacao e sao persistidos no formato canonico
 - Métodos HTTP não suportados em rotas existentes devem retornar `405 Method Not Allowed`
 - Operacoes criticas devem ser atomicas e protegidas por transação
 - Falhas de autenticação e autorizacao não podem produzir efeito colateral

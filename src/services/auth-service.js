@@ -24,7 +24,7 @@ function toUserResponse(user) {
     guildName: user.guildName || null,
     guildRank: user.guildRank || null,
     race: user.race,
-    class: user.className,
+    class: canonicalizeClass(user.className),
     roleType: user.roleType,
     createdAt: user.createdAt,
     updatedAt: user.updatedAt

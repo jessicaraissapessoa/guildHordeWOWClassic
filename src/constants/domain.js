@@ -10,7 +10,7 @@ const CLASSES = {
   guerreiro: 'Guerreiro',
   cacador: 'Cacador',
   ladino: 'Ladino',
-  xama: 'Xama',
+  xama: 'Xamã',
   bruxo: 'Bruxo',
   druida: 'Druida',
   sacerdote: 'Sacerdote',
@@ -37,13 +37,13 @@ const CLASS_ROLE_MATRIX = {
     Guerreiro: ['Tank', 'DPS'],
     Cacador: ['DPS'],
     Ladino: ['DPS'],
-    Xama: ['Healer', 'DPS'],
+    'Xamã': ['Healer', 'DPS'],
     Bruxo: ['DPS']
   },
   Tauren: {
     Guerreiro: ['Tank', 'DPS'],
     Cacador: ['DPS'],
-    Xama: ['Healer', 'DPS'],
+    'Xamã': ['Healer', 'DPS'],
     Druida: ['Tank', 'Healer', 'DPS']
   },
   Troll: {
@@ -51,7 +51,7 @@ const CLASS_ROLE_MATRIX = {
     Cacador: ['DPS'],
     Ladino: ['DPS'],
     Sacerdote: ['Healer', 'DPS'],
-    Xama: ['Healer', 'DPS'],
+    'Xamã': ['Healer', 'DPS'],
     Mago: ['DPS']
   },
   'Morto-vivo': {

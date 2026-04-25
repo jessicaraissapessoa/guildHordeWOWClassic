@@ -132,7 +132,9 @@ function canonicalizeGuildRank(value) {
 }
 
 function assertRaceClassRoleCombination(race, className, roleType) {
-  const allowedRoles = CLASS_ROLE_MATRIX[race] && CLASS_ROLE_MATRIX[race][className];
+  const canonicalClassName = CLASSES[normalizeToken(className)] || className;
+  const allowedRoles =
+    CLASS_ROLE_MATRIX[race] && CLASS_ROLE_MATRIX[race][canonicalClassName];
 
   if (!allowedRoles || !allowedRoles.includes(roleType)) {
     throw new AppError(
@@ -140,7 +142,7 @@ function assertRaceClassRoleCombination(race, className, roleType) {
       'BUSINESS_RULE_CONFLICT',
       'Operation violates a business rule.',
       [
-        {
+      {
           field: 'roleType',
           message: 'race, class and roleType combination is invalid.'
         }

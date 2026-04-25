@@ -276,6 +276,12 @@
 - Endpoint: `POST /auth/register`, `POST /auth/login`
 - Resultado esperado: payloads de resposta e erros não contem senha nem hash
 
+## CT-047 - Aceitar enums com e sem acentuacao na entrada
+
+- User story relacionada: US-001, US-009, US-012, US-013
+- Endpoint: `POST /auth/register`, `PATCH /guilds/members/{characterName}/rank`, `PATCH /users/me/role-type`, `GET /users`
+- Resultado esperado: entradas como `xamã`, `xamá`, `xama`, `líder` e `lider` sao interpretadas corretamente e persistidas/retornadas no valor canonico
+
 ## CPT-001 - Medir performance do login sob carga controlada
 
 - Tipo: performance

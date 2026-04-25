@@ -191,7 +191,7 @@ Padronizar nomes de guilda e evitar entradas invalidas.
 
 ### Regra
 
-Os campos `race`, `class`, `roleType` e `guildRank` aceitam somente valores pre-definidos. A API aceita entrada em qualquer caixa e persiste o valor canonico.
+Os campos `race`, `class`, `roleType` e `guildRank` aceitam somente valores pre-definidos. A API aceita entrada em qualquer caixa, ignorando acentuacao na interpretacao do enum, e persiste o valor canonico.
 
 ### Justificativa
 
@@ -210,9 +210,9 @@ Garantir consistencia no dominio e facilitar filtros.
 
 Somente as combinacoes definidas para a Horda em WoW Classic sao permitidas:
 
-- Orc: Guerreiro(Tank, DPS), Cacador(DPS), Ladino(DPS), Xama(Healer, DPS), Bruxo(DPS)
-- Tauren: Guerreiro(Tank, DPS), Cacador(DPS), Xama(Healer, DPS), Druida(Tank, Healer, DPS)
-- Troll: Guerreiro(Tank, DPS), Cacador(DPS), Ladino(DPS), Sacerdote(Healer, DPS), Xama(Healer, DPS), Mago(DPS)
+- Orc: Guerreiro(Tank, DPS), Cacador(DPS), Ladino(DPS), Xamã(Healer, DPS), Bruxo(DPS)
+- Tauren: Guerreiro(Tank, DPS), Cacador(DPS), Xamã(Healer, DPS), Druida(Tank, Healer, DPS)
+- Troll: Guerreiro(Tank, DPS), Cacador(DPS), Ladino(DPS), Sacerdote(Healer, DPS), Xamã(Healer, DPS), Mago(DPS)
 - Morto-vivo: Guerreiro(Tank, DPS), Ladino(DPS), Sacerdote(Healer, DPS), Mago(DPS), Bruxo(DPS)
 
 ### Justificativa

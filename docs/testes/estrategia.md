@@ -35,6 +35,7 @@ Testam tempo de resposta, estabilidade e comportamento sob carga nos endpoints m
 - Validacoes de `username`, `password`, `characterName` e `guildName`
 - Unicidade case-insensitive
 - Combinacoes validas de `race`, `class` e `roleType`
+- Normalizacao de enums ignorando acentuacao
 - Hierarquia `Leader > Officer > Member`
 - Criacao e delecao de guilda
 - Listagem de guildas

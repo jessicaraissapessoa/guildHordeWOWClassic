@@ -7,6 +7,7 @@ const {
   assertGuildName,
   assertCharacterName,
   canonicalizeGuildRank,
+  canonicalizeClass,
   normalizeGuildName,
   normalizeCharacterName,
   canManageRank
@@ -141,7 +142,7 @@ async function listGuildMembers(guildName) {
       guildName: member.guildName,
       guildRank: member.guildRank,
       race: member.race,
-      class: member.className,
+      class: canonicalizeClass(member.className),
       roleType: member.roleType
     }))
   };
@@ -184,7 +185,7 @@ async function addGuildMember(authUserId, payload) {
       guildName: updated.guildName || actor.guildName,
       guildRank: updated.guildRank,
       race: updated.race,
-      class: updated.className,
+      class: canonicalizeClass(updated.className),
       roleType: updated.roleType,
       createdAt: updated.createdAt,
       updatedAt: updated.updatedAt
@@ -237,7 +238,7 @@ async function updateGuildMemberRank(authUserId, characterName, payload) {
       guildName: updated.guildName,
       guildRank: updated.guildRank,
       race: updated.race,
-      class: updated.className,
+      class: canonicalizeClass(updated.className),
       roleType: updated.roleType,
       createdAt: updated.createdAt,
       updatedAt: updated.updatedAt
