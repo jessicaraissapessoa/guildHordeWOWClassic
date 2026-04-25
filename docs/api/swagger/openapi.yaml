@@ -1,0 +1,730 @@
+openapi: 3.0.3
+info:
+  title: guildHordeWOWClassic API
+  version: 1.0.0
+  description: API para gestão de usuários e guildas da Horda em World of Warcraft Classic.
+servers:
+  - url: http://localhost:3000
+    description: Ambiente local
+tags:
+  - name: Auth
+    description: Cadastro e autenticação de usuários.
+  - name: Users
+    description: Consulta de usuários, manutencao da propria função e delecao da propria conta.
+  - name: Guilds
+    description: Criacao de guilda, gestão de integrantes e administracao da propria guilda.
+security:
+  - bearerAuth: []
+paths:
+  /auth/register:
+    post:
+      tags: [Auth]
+      operationId: registerUser
+      summary: Cadastrar usuário
+      description: Cria um novo usuário sem guilda e sem cargo. A combinação entre raça, classe e função deve ser valida.
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterRequest'
+            examples:
+              default:
+                value:
+                  username: thrall
+                  password: Senha@123
+                  characterName: Thrall
+                  race: orc
+                  class: xama
+                  roleType: dps
+      responses:
+        '201':
+          description: Usuário criado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '405':
+          $ref: '#/components/responses/MethodNotAllowed'
+  /auth/login:
+    post:
+      tags: [Auth]
+      operationId: loginUser
+      summary: Realizar login
+      description: Autentica um usuário com username e senha e retorna um JWT.
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+            examples:
+              default:
+                value:
+                  username: thrall
+                  password: Senha@123
+      responses:
+        '200':
+          description: Login realizado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '405':
+          $ref: '#/components/responses/MethodNotAllowed'
+  /users:
+    get:
+      tags: [Users]
+      operationId: listUsers
+      summary: Listar usuários
+      description: Lista usuários com e sem guilda, com filtros opcionais, paginacao e ordenacao.
+      parameters:
+        - $ref: '#/components/parameters/username'
+        - $ref: '#/components/parameters/characterName'
+        - $ref: '#/components/parameters/guildNameQuery'
+        - $ref: '#/components/parameters/guildRank'
+        - $ref: '#/components/parameters/race'
+        - $ref: '#/components/parameters/class'
+        - $ref: '#/components/parameters/roleType'
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/pageSize'
+        - $ref: '#/components/parameters/sortBy'
+        - $ref: '#/components/parameters/sortOrder'
+      responses:
+        '200':
+          description: Lista paginada de usuários
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedUsersResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '405':
+          $ref: '#/components/responses/MethodNotAllowed'
+  /users/me:
+    delete:
+      tags: [Users]
+      operationId: deleteOwnUser
+      summary: Deletar o proprio usuário
+      description: Remove permanentemente a propria conta. Se o usuário ainda for líder de uma guilda, a operacao deve ser bloqueada.
+      responses:
+        '204':
+          description: Usuário deletado com sucesso
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '405':
+          $ref: '#/components/responses/MethodNotAllowed'
+  /users/me/role-type:
+    patch:
+      tags: [Users]
+      operationId: updateOwnRoleType
+      summary: Alterar a propria função
+      description: Altera a função do usuário autenticado, validando a combinação resultante entre raça, classe e função.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateOwnRoleTypeRequest'
+      responses:
+        '200':
+          description: Função alterada com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '405':
+          $ref: '#/components/responses/MethodNotAllowed'
+  /guilds:
+    post:
+      tags: [Guilds]
+      operationId: createGuild
+      summary: Criar guilda
+      description: Cria uma guilda e torna o autor autenticado o líder da nova guilda.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateGuildRequest'
+            examples:
+              default:
+                value:
+                  guildName: Filhos da Horda
+      responses:
+        '201':
+          description: Guilda criada com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GuildResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '405':
+          $ref: '#/components/responses/MethodNotAllowed'
+  /guilds/me:
+    delete:
+      tags: [Guilds]
+      operationId: deleteOwnGuild
+      summary: Deletar a propria guilda
+      description: Deleta a guilda do líder autenticado e desvincula todos os integrantes.
+      responses:
+        '204':
+          description: Guilda deletada com sucesso
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '405':
+          $ref: '#/components/responses/MethodNotAllowed'
+  /guilds/{guildName}/members:
+    get:
+      tags: [Guilds]
+      operationId: listGuildMembers
+      summary: Listar integrantes de uma guilda
+      description: Consulta os integrantes de uma guilda por nome. A identificacao de guildName deve ser case-insensitive.
+      parameters:
+        - $ref: '#/components/parameters/guildNamePath'
+      responses:
+        '200':
+          description: Integrantes da guilda
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GuildMembersResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '405':
+          $ref: '#/components/responses/MethodNotAllowed'
+  /guilds/members:
+    post:
+      tags: [Guilds]
+      operationId: addGuildMember
+      summary: Cadastrar integrante na guilda do autor
+      description: Adiciona um usuário existente e sem guilda na guilda do autor autenticado. O alvo entra como Member.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddGuildMemberRequest'
+            examples:
+              default:
+                value:
+                  characterName: Voljin
+      responses:
+        '201':
+          description: Integrante adicionado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '405':
+          $ref: '#/components/responses/MethodNotAllowed'
+  /guilds/members/{characterName}/rank:
+    patch:
+      tags: [Guilds]
+      operationId: updateGuildMemberRank
+      summary: Alterar cargo de integrante
+      description: Altera o cargo de um integrante da mesma guilda. Apenas o líder pode executar a operacao.
+      parameters:
+        - $ref: '#/components/parameters/characterNamePath'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateGuildMemberRankRequest'
+      responses:
+        '200':
+          description: Cargo alterado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '405':
+          $ref: '#/components/responses/MethodNotAllowed'
+  /guilds/members/{characterName}:
+    delete:
+      tags: [Guilds]
+      operationId: removeGuildMember
+      summary: Remover integrante da guilda
+      description: Remove um integrante da guilda do autor, respeitando a hierarquia de cargos.
+      parameters:
+        - $ref: '#/components/parameters/characterNamePath'
+      responses:
+        '204':
+          description: Integrante removido com sucesso
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '405':
+          $ref: '#/components/responses/MethodNotAllowed'
+  /guilds/me/leave:
+    post:
+      tags: [Guilds]
+      operationId: leaveOwnGuild
+      summary: Sair da guilda atual
+      description: Permite que o usuário autenticado saia da guilda atual. Líder não pode sair sem antes transferir a lideranca.
+      responses:
+        '204':
+          description: Usuário saiu da guilda com sucesso
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '405':
+          $ref: '#/components/responses/MethodNotAllowed'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  parameters:
+    username:
+      name: username
+      in: query
+      description: Filtro por username. A comparacao deve ser case-insensitive.
+      schema:
+        type: string
+    characterName:
+      name: characterName
+      in: query
+      description: Filtro por nome do personagem. A comparacao deve ser case-insensitive.
+      schema:
+        type: string
+    guildNameQuery:
+      name: guildName
+      in: query
+      description: Filtro por nome da guilda. A comparacao deve ser case-insensitive.
+      schema:
+        type: string
+    guildNamePath:
+      name: guildName
+      in: path
+      required: true
+      description: Nome da guilda. A identificacao deve ser case-insensitive.
+      schema:
+        type: string
+    guildRank:
+      name: guildRank
+      in: query
+      description: Filtro por cargo na guilda.
+      schema:
+        $ref: '#/components/schemas/GuildRank'
+    race:
+      name: race
+      in: query
+      description: Filtro por raça. A API aceita entrada em qualquer caixa e normaliza para o valor canonico.
+      schema:
+        $ref: '#/components/schemas/Race'
+    class:
+      name: class
+      in: query
+      description: Filtro por classe. A API aceita entrada em qualquer caixa e normaliza para o valor canonico.
+      schema:
+        $ref: '#/components/schemas/Class'
+    roleType:
+      name: roleType
+      in: query
+      description: Filtro por função. A API aceita entrada em qualquer caixa e normaliza para o valor canonico.
+      schema:
+        $ref: '#/components/schemas/RoleType'
+    characterNamePath:
+      name: characterName
+      in: path
+      required: true
+      description: Nome do personagem. A identificacao deve ser case-insensitive.
+      schema:
+        type: string
+    page:
+      name: page
+      in: query
+      description: Numero da pagina, iniciando em 1.
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    pageSize:
+      name: pageSize
+      in: query
+      description: Quantidade de itens por pagina.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 20
+    sortBy:
+      name: sortBy
+      in: query
+      description: Campo utilizado para ordenacao.
+      schema:
+        type: string
+        enum: [username, characterName, guildName, guildRank, race, class, roleType, createdAt]
+    sortOrder:
+      name: sortOrder
+      in: query
+      description: Direcao da ordenacao.
+      schema:
+        type: string
+        enum: [asc, desc]
+        default: asc
+  schemas:
+    RegisterRequest:
+      type: object
+      required: [username, password, characterName, race, class, roleType]
+      properties:
+        username:
+          type: string
+          description: Username unico globalmente, validado de forma case-insensitive.
+          example: thrall
+        password:
+          type: string
+          format: password
+          description: Senha em texto puro enviada apenas no request, nunca retornada em respostas.
+          example: Senha@123
+        characterName:
+          type: string
+          description: Nome do personagem unico globalmente, validado de forma case-insensitive.
+          example: Thrall
+        race:
+          $ref: '#/components/schemas/Race'
+        class:
+          $ref: '#/components/schemas/Class'
+        roleType:
+          $ref: '#/components/schemas/RoleType'
+      additionalProperties: false
+    LoginRequest:
+      type: object
+      required: [username, password]
+      properties:
+        username:
+          type: string
+          example: thrall
+        password:
+          type: string
+          format: password
+          example: Senha@123
+      additionalProperties: false
+    LoginResponse:
+      type: object
+      required: [accessToken, tokenType, expiresIn]
+      properties:
+        accessToken:
+          type: string
+          description: JWT de acesso.
+        tokenType:
+          type: string
+          example: Bearer
+        expiresIn:
+          type: integer
+          example: 3600
+    CreateGuildRequest:
+      type: object
+      required: [guildName]
+      properties:
+        guildName:
+          type: string
+          description: Nome unico globalmente, validado de forma case-insensitive apos trim.
+          example: Filhos da Horda
+      additionalProperties: false
+    AddGuildMemberRequest:
+      type: object
+      required: [characterName]
+      properties:
+        characterName:
+          type: string
+          description: Nome do personagem a ser adicionado na guilda do autor.
+          example: Voljin
+      additionalProperties: false
+    UpdateOwnRoleTypeRequest:
+      type: object
+      required: [roleType]
+      properties:
+        roleType:
+          $ref: '#/components/schemas/RoleType'
+      additionalProperties: false
+    UpdateGuildMemberRankRequest:
+      type: object
+      required: [guildRank]
+      properties:
+        guildRank:
+          $ref: '#/components/schemas/GuildRank'
+      additionalProperties: false
+    UserResponse:
+      type: object
+      required: [id, username, characterName, race, class, roleType, createdAt, updatedAt]
+      properties:
+        id:
+          type: integer
+          example: 1
+        username:
+          type: string
+          example: thrall
+        characterName:
+          type: string
+          example: Thrall
+        guildName:
+          type: string
+          nullable: true
+          example: Filhos da Horda
+        guildRank:
+          allOf:
+            - $ref: '#/components/schemas/GuildRank'
+          nullable: true
+        race:
+          $ref: '#/components/schemas/Race'
+        class:
+          $ref: '#/components/schemas/Class'
+        roleType:
+          $ref: '#/components/schemas/RoleType'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    GuildResponse:
+      type: object
+      required: [id, guildName, leaderCharacterName, createdAt, updatedAt]
+      properties:
+        id:
+          type: integer
+          example: 10
+        guildName:
+          type: string
+          example: Filhos da Horda
+        leaderCharacterName:
+          type: string
+          example: Thrall
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    GuildMembersResponse:
+      type: object
+      required: [guildName, members]
+      properties:
+        guildName:
+          type: string
+          example: Filhos da Horda
+        members:
+          type: array
+          items:
+            $ref: '#/components/schemas/GuildMemberResponse'
+    GuildMemberResponse:
+      type: object
+      required: [characterName, guildName, guildRank, race, class, roleType]
+      properties:
+        characterName:
+          type: string
+          example: Voljin
+        guildName:
+          type: string
+          example: Filhos da Horda
+        guildRank:
+          $ref: '#/components/schemas/GuildRank'
+        race:
+          $ref: '#/components/schemas/Race'
+        class:
+          $ref: '#/components/schemas/Class'
+        roleType:
+          $ref: '#/components/schemas/RoleType'
+    PaginatedUsersResponse:
+      type: object
+      required: [page, pageSize, total, items]
+      properties:
+        page:
+          type: integer
+        pageSize:
+          type: integer
+        total:
+          type: integer
+        totalPages:
+          type: integer
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserResponse'
+    Race:
+      type: string
+      description: A API aceita entrada em qualquer caixa e normaliza para o valor canonico retornado abaixo.
+      enum: [Orc, Tauren, Troll, Morto-vivo]
+    Class:
+      type: string
+      description: A API aceita entrada em qualquer caixa e normaliza para o valor canonico retornado abaixo.
+      enum: [Guerreiro, Cacador, Ladino, Xama, Bruxo, Druida, Sacerdote, Mago]
+    RoleType:
+      type: string
+      description: A API aceita entrada em qualquer caixa e normaliza para o valor canonico retornado abaixo.
+      enum: [Tank, Healer, DPS]
+    GuildRank:
+      type: string
+      description: Cargo do usuário na guilda.
+      enum: [Leader, Officer, Member]
+    ErrorResponse:
+      type: object
+      required: [statusCode, error, message, timestamp, path]
+      properties:
+        statusCode:
+          type: integer
+        error:
+          type: string
+        message:
+          type: string
+        details:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
+        timestamp:
+          type: string
+          format: date-time
+        path:
+          type: string
+  responses:
+    BadRequest:
+      description: Requisicao invalida
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            default:
+              value:
+                statusCode: 400
+                error: VALIDATION_ERROR
+                message: Request body is invalid.
+                details:
+                  - field: username
+                    message: username is invalid.
+                timestamp: '2026-04-24T00:00:00.000Z'
+                path: /auth/register
+    Unauthorized:
+      description: Usuário não autenticado
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            default:
+              value:
+                statusCode: 401
+                error: UNAUTHORIZED
+                message: Authentication is required to access this resource.
+                timestamp: '2026-04-24T00:00:00.000Z'
+                path: /users
+    Forbidden:
+      description: Usuário sem permissao
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            default:
+              value:
+                statusCode: 403
+                error: FORBIDDEN
+                message: Authenticated user does not have permission for this operation.
+                timestamp: '2026-04-24T00:00:00.000Z'
+                path: /guilds/me
+    NotFound:
+      description: Recurso não encontrado
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Conflict:
+      description: Conflito de regra de negocio
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            default:
+              value:
+                statusCode: 409
+                error: BUSINESS_RULE_CONFLICT
+                message: Operation violates a business rule.
+                timestamp: '2026-04-24T00:00:00.000Z'
+                path: /guilds
+    MethodNotAllowed:
+      description: Método HTTP não suportado para a rota
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    TooManyRequests:
+      description: Limite de requisicoes excedido
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
